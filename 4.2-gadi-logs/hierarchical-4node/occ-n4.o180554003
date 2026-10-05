@@ -1,0 +1,67 @@
+Loading OpenFOAM/2512
+  Loading requirement: openmpi/4.1.7
+nCores          416;
+decompositionMethod hierarchical;
+nHierarchical   ( 13 8 4 );
+endTime         150;
+decompositionMethod=hierarchical nCores=416 endTime=150
+
+decomposePar
+
+real	4m30.021s
+user	2m20.655s
+sys	1m54.570s
+
+restore 0 Directory
+Restore 0/ from 0.orig/  [processor dirs]
+
+renumberMesh
+
+real	0m58.331s
+user	34m9.335s
+sys	52m12.403s
+
+potentialFoam
+
+real	0m47.975s
+user	21m23.969s
+sys	50m51.784s
+
+applyBoundaryLayer
+
+real	0m38.792s
+user	6m8.240s
+sys	50m42.337s
+
+simpleFoam
+
+real	6m48.416s
+user	644m44.696s
+sys	52m7.525s
+... done!
+label=vanilla-4node
+run=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/vanilla-4node.180554003
+decompositionMethod=hierarchical
+nCores=416
+nHierarchical=(13 8 4)
+endTime=150
+nProcessorDirs=416
+mesh=/scratch/vp91/pz7344/openfoam-occ-drivaer/mesh/polyMesh
+module=OpenFOAM/2512
+jobid=180554003.gadi-pbs
+coefficient=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/vanilla-4node.180554003/postProcessing/forceCoeffsAll/0/coefficient.dat
+Cd=2.8998463838634941e-01
+    Average wall-clock time per time step = 2.379600209503355
+SHAPE /scratch/vp91/pz7344/openfoam-occ-drivaer/runs/vanilla-4node.180554003/SHAPE
+
+======================================================================================
+                  Resource Usage on 2026-10-06 07:51:52:
+   Job Id:             180554003.gadi-pbs
+   Project:            vp91
+   Exit Status:        0
+   Service Units:      193.67
+   NCPUs Requested:    416                 CPU Time Used: 60:40:24        
+   Memory Requested:   1.62TB                Memory Used: 299.79GB        
+   Walltime Requested: 01:00:00            Walltime Used: 00:13:58        
+   JobFS Requested:    400.0MB                JobFS Used: 8.32MB          
+======================================================================================

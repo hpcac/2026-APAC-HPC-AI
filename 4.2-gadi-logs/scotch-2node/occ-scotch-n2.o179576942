@@ -1,0 +1,65 @@
+Loading OpenFOAM/2512
+  Loading requirement: openmpi/4.1.7
+nCores          208;
+decompositionMethod scotch;
+endTime         80;
+decompositionMethod=scotch nCores=208 endTime=80
+
+decomposePar
+
+real	5m17.768s
+user	4m0.069s
+sys	1m11.665s
+
+restore 0 Directory
+Restore 0/ from 0.orig/  [processor dirs]
+
+renumberMesh
+
+real	0m45.733s
+user	14m40.469s
+sys	52m39.091s
+
+potentialFoam
+
+real	0m49.522s
+user	23m12.205s
+sys	51m8.961s
+
+applyBoundaryLayer
+
+real	0m39.384s
+user	6m58.183s
+sys	50m53.343s
+
+simpleFoam
+
+real	6m31.058s
+user	613m42.314s
+sys	53m26.905s
+... done!
+label=scotch-2node
+run=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-2node.179576942
+decompositionMethod=scotch
+nCores=208
+endTime=80
+nProcessorDirs=208
+mesh=/scratch/vp91/pz7344/openfoam-occ-drivaer/mesh/polyMesh
+module=OpenFOAM/2512
+jobid=179576942.gadi-pbs
+coefficient=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-2node.179576942/postProcessing/forceCoeffsAll/0/coefficient.dat
+Cd=3.3963569310734082e-01
+    Average wall-clock time per time step = 4.213002158873415
+SHAPE /scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-2node.179576942/SHAPE
+
+======================================================================================
+                  Resource Usage on 2026-09-22 15:15:24:
+   Job Id:             179576942.gadi-pbs
+   Project:            vp91
+   Exit Status:        0
+   Service Units:      98.68
+   NCPUs Requested:    208                 CPU Time Used: 28:54:44        
+   Memory Requested:   832.0GB               Memory Used: 215.23GB        
+   Walltime Requested: 01:30:00            Walltime Used: 00:14:14        
+   JobFS Requested:    200.0MB                JobFS Used: 8.32MB          
+======================================================================================

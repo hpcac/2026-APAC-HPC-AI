@@ -1,0 +1,73 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : renumberMesh -constant -overwrite -parallel
+Date   : Sep 22 2026
+Time   : 15:05:45
+Host   : gadi-cpu-spr-0545.gadi.nci.org.au
+PID    : 958151
+I/O    : uncollated
+Case   : /scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-4node.179576943
+nProcs : 416
+Hosts  :
+(
+    (gadi-cpu-spr-0545.gadi.nci.org.au 104)
+    (gadi-cpu-spr-0546.gadi.nci.org.au 104)
+    (gadi-cpu-spr-0547.gadi.nci.org.au 104)
+    (gadi-cpu-spr-0548.gadi.nci.org.au 104)
+)
+Pstream initialized with:
+    node communication : on [type=host] (416 ranks, 4 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = constant
+
+Mesh region0 size: 65334765
+Before renumbering
+    band           : 158412
+    profile        : 269649440410
+
+Using renumber-method: CuthillMcKee [default]
+
+Reading fields
+
+Renumbering processor cell decomposition map cellProcAddressing
+Renumbering processor face decomposition map faceProcAddressing
+Renumbering processor point decomposition map pointProcAddressing
+After renumbering
+    band           : 15311
+    profile        : 193940632618
+
+Writing mesh to "constant"
+
+Timings:
+    read mesh   : 0.82763815
+    read fields : 0.077010916
+    decompose   : 0
+    cell-cells  : 0
+    renumber    : 0.06591214099999999
+    write       : 0.309771766
+TotalTime = 1.846236243 s
+
+ExecutionTime = 6.96 s  ClockTime = 8 s
+
+End
+
+Finalising parallel run

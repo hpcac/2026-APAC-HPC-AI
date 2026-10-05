@@ -1,0 +1,57 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : applyBoundaryLayer -ybl 0.0450244 -parallel
+Date   : Oct 06 2026
+Time   : 07:43:29
+Host   : gadi-cpu-spr-0542.gadi.nci.org.au
+PID    : 2056710
+I/O    : uncollated
+Case   : /scratch/vp91/pz7344/openfoam-occ-drivaer/runs/vanilla-2node.180554002
+nProcs : 208
+Hosts  :
+(
+    (gadi-cpu-spr-0542.gadi.nci.org.au 104)
+    (gadi-cpu-spr-0564.gadi.nci.org.au 104)
+)
+Pstream initialized with:
+    node communication : on [type=host] (208 ranks, 2 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Reading field U
+
+Calculating wall distance field
+Selecting patchDistMethod meshWave
+
+Creating boundary-layer for U of thickness 0.0450244 m
+
+Creating mask field
+Setting boundary layer velocity
+
+Writing U
+
+
+ExecutionTime = 3.25 s  ClockTime = 3 s
+
+End
+
+Finalising parallel run
