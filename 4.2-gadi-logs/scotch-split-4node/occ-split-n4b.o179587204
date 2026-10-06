@@ -1,0 +1,51 @@
+Loading OpenFOAM/2512
+  Loading requirement: openmpi/4.1.7
+stage=parallel run=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-split-4node.20260922-144120 decompositionMethod=scotch nCores=416 endTime=150
+renumberMesh
+
+real	0m49.257s
+user	7m54.839s
+sys	60m50.650s
+potentialFoam
+
+real	0m43.919s
+user	14m3.040s
+sys	51m21.071s
+applyBoundaryLayer
+
+real	0m38.166s
+user	5m1.823s
+sys	50m30.143s
+simpleFoam
+
+real	6m1.072s
+user	561m57.914s
+sys	53m6.215s
+stage=parallel
+label=scotch-split-4node
+run=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-split-4node.20260922-144120
+decompositionMethod=scotch
+nCores=416
+endTime=150
+nProcessorDirs=416
+mesh=/scratch/vp91/pz7344/openfoam-occ-drivaer/mesh/polyMesh
+module=OpenFOAM/2512
+serial_jobid=179587202.gadi-pbs
+parallel_jobid=179587204.gadi-pbs
+coefficient=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-split-4node.20260922-144120/postProcessing/forceCoeffsAll/0/coefficient.dat
+Cd=2.9187596691164680e-01
+    Average wall-clock time per time step = 2.064185860342281
+Finished decomposition in 226.13 s
+SHAPE /scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-split-4node.20260922-144120/SHAPE
+
+======================================================================================
+                  Resource Usage on 2026-09-22 17:11:45:
+   Job Id:             179587204.gadi-pbs
+   Project:            vp91
+   Exit Status:        0
+   Service Units:      114.63
+   NCPUs Requested:    416                 CPU Time Used: 53:36:45        
+   Memory Requested:   1.62TB                Memory Used: 274.39GB        
+   Walltime Requested: 00:15:00            Walltime Used: 00:08:16        
+   JobFS Requested:    400.0MB                JobFS Used: 8.32MB          
+======================================================================================

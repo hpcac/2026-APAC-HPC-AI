@@ -1,0 +1,29 @@
+Loading OpenFOAM/2512
+  Loading requirement: openmpi/4.1.7
+endTime         40;
+label=reuse-scotch-1node src=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-split-1node.20260922-140737 nCores=104 endTime=40
+simpleFoam
+
+real	6m48.067s
+user	626m40.370s
+sys	69m13.527s
+label=reuse-scotch-1node
+run=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/reuse-scotch-1node.180584690
+src=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-split-1node.20260922-140737
+nCores=104
+endTime=40
+jobid=180584690.gadi-pbs
+Cd=4.3806006706835021e-01
+    Average wall-clock time per time step = 8.441977613307696
+
+======================================================================================
+                  Resource Usage on 2026-10-06 14:12:39:
+   Job Id:             180584690.gadi-pbs
+   Project:            vp91
+   Exit Status:        0
+   Service Units:      23.92
+   NCPUs Requested:    104                 CPU Time Used: 11:35:56        
+   Memory Requested:   416.0GB               Memory Used: 165.75GB        
+   Walltime Requested: 00:20:00            Walltime Used: 00:06:54        
+   JobFS Requested:    100.0MB                JobFS Used: 8.32MB          
+======================================================================================

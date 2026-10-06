@@ -1,0 +1,475 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+FoamFile
+{
+    version         2;
+    format          ascii;
+    class           dictionary;
+    object          controlDict;
+}
+
+lref            2.78618;
+
+Aref            2.17;
+
+inletPatch      inlet;
+
+outletPatch     outlet;
+
+slipGroundPatch ground;
+
+fixedWallPatches "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rims.*|Brake.*|Tires.*|Plinth.*|ground_noSlip.*)";
+
+symmPatches     freestream;
+
+forcesWallPatches "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)";
+
+Uinf            ( 38.889 0 0 );
+
+UinfMag         38.889;
+
+nu              1.507e-05;
+
+pref            0;
+
+viscRatio       5;
+
+Tu              0.0026;
+
+RASturbModel    kOmegaSST;
+
+nCores          104;
+
+decompositionMethod scotch;
+
+nHierarchical   ( 16 8 4 );
+
+interpScheme    cellPatchConstrained;
+
+probeField      cp;
+
+application     simpleFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         40;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   100000;
+
+purgeWrite      2;
+
+writeFormat     binary;
+
+writePrecision  16;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   7;
+
+runTimeModifiable yes;
+
+adjustableRunTime no;
+
+libs            ( "libOpenFOAM.so" "libdistributed.so" "libturbulenceModelSchemes.so" "libfieldFunctionObjects.so" );
+
+functions
+{
+    wallClockTimeStatistics
+    {
+        type            coded;
+        name            wallClockTimeStatistics;
+        libs            ( utilityFunctionObjects );
+        codeContext
+        {
+            verbose         true;
+        }
+        codeInclude     #{
+        #include "clockValue.H"
+        #include "OFstream.H"
+        #include "writeFile.H"
+    #};
+        codeData        #{
+        //- Sum of the measured times
+        double sum_ = 0.0;
+
+        //- Statistical error threshold for the final evaluation
+        const double error_ = 0.02;
+
+        //- Identifier of the first time step
+        bool firstTimeStep_ = true;
+
+        //- High-precision wall-clock timer
+        clockValue wallClock_;
+
+        //- List with times per time step
+        DynamicList<double> times_;
+
+        // A wrapper that enables usage of the protected members of writeFile
+        class writeFileClock
+        :
+            public functionObjects::writeFile
+        {
+            public:
+
+                using functionObjects::writeFile::writeFile;
+
+                virtual autoPtr<OFstream> newFileAtStartTime
+                (
+                    const word& name
+                ) const
+                {
+                    return functionObjects::writeFile::newFileAtStartTime(name);
+                }
+        };
+
+        // Coded FO provides no access to constructors.  Use autoPtr and
+        // initialise later.
+        autoPtr<writeFileClock> writeFilePtr_;
+        autoPtr<OFstream> filePtr_;
+    #};
+        codeExecute     #{
+        // Exclude the first time step from the statistics since no correct
+        // measurement may be executed
+        if (firstTimeStep_)
+        {
+            firstTimeStep_ = false;
+
+            // Create file for writing
+            if (Pstream::master())
+            {
+                writeFilePtr_.reset(new writeFileClock(mesh(), name()));
+                writeFileClock& wfc = writeFilePtr_();
+                filePtr_ = wfc.newFileAtStartTime("wallClockTime");
+                OFstream& os = filePtr_();
+                wfc.writeHeader(os, "Wall-clock time (WCT)");
+                wfc.writeCommented(os, "Time");
+                wfc.writeTabbed(os, "accumulatedWCT");
+                wfc.writeTabbed(os, "timeStepWCT");
+                os << endl;
+            }
+        }
+        else
+        {
+            const double dt = wallClock_.elapsedTime();
+            Info<< "Wall-clock time elapsed during the current time step = "
+                << dt << " s" << nl << endl;
+            times_.append(dt);
+            sum_ += dt;
+        }
+        wallClock_.update();
+    #};
+        codeWrite       #{
+        if (Pstream::master())
+        {
+            if (times_.size())
+            {
+                OFstream& os = filePtr_();
+                writeFileClock& wfc = writeFilePtr_();
+                wfc.writeCurrentTime(os);
+                os << tab << sum_;
+                os << tab << times_.back();
+                os << endl;
+            }
+        }
+    #};
+        codeEnd         #{
+        const auto n = static_cast<scalar>(times_.size());
+        const double mean = sum_/n;
+
+        // Compute standard deviation
+        double stdDev = 0.0;
+        forAll(times_, i)
+        {
+            stdDev += (times_[i] - mean)*(times_[i] - mean);
+        }
+        stdDev = sqrt(stdDev/n);
+
+        // Compute number of time steps needed for statistical time measurement
+        // with error "error_" at 95% confidence level.
+        const label minN = round(sqr(1.96*stdDev/(error_*mean)));
+
+        Info<< "Statistics:" << nl
+            << "    Number of measured time steps = "
+            << times_.size() << nl
+            << "    Average wall-clock time per time step = "
+            << mean << nl
+            << "    Standard deviation of wall-clock time per time step = "
+            << stdDev << nl
+            << "    Minimum number of measured time steps for " << error_*100
+            << "% error at 95% confidence level = "
+            << minN << nl << endl;
+
+        if (times_.size() < minN)
+        {
+            WarningInFunction
+                << "Number of time steps of the current run is smaller than"
+                << " the calculated one by the statistical analysis."
+                << " Consider to raise endTime in controlDict."
+                << nl << endl;
+        }
+    #};
+    }
+    minMax_U
+    {
+        type            fieldMinMax;
+        libs            ( "libfieldFunctionObjects.so" );
+        fields          ( U );
+        log             false;
+    }
+    minMax_p
+    {
+        type            fieldMinMax;
+        libs            ( "libfieldFunctionObjects.so" );
+        fields          ( p );
+        log             false;
+    }
+    solverInfo
+    {
+        type            solverInfo;
+        libs            ( "libutilityFunctionObjects.so" );
+        fields          ( U p k omega );
+        writeControl    timeStep;
+        writeInterval   1;
+        writeResidualFields no;
+    }
+    forceCoeffsAll
+    {
+        type            forceCoeffs;
+        libs            ( "libforces.so" );
+        writeControl    timeStep;
+        writeInterval   1;
+        log             false;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        magUInf         38.889;
+        lRef            2.78618;
+        Aref            2.17;
+        rhoInf          1;
+        rho             rhoInf;
+        CofR            ( 1.40009 0 -0.3176 );
+        dragDir         ( 1 0 0 );
+        liftDir         ( 0 0 1 );
+        pitchAxis       ( 0 1 0 );
+    }
+    calc_cp
+    {
+        type            pressure;
+        libs            ( fieldFunctionObjects );
+        mode            staticCoeff;
+        result          cp;
+        p               p;
+        U               U;
+        pInf            0;
+        UInf            ( 38.889 0 0 );
+        rho             rhoInf;
+        rhoInf          1;
+        writeControl    writeTime;
+    }
+    probes_600
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_600;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        probeLocations  ( ( -0.79825 0 0.15 ) ( -0.7 0 0.40635 ) ( -0.6 0 0.46263 ) ( -0.5 0 0.49945 ) ( -0.4 0 0.5277 ) ( -0.3 0 0.55085 ) ( -0.1 0 0.58773 ) ( 0 0 0.60305 ) ( 0.1 0 0.6169 ) ( 0.3 0 0.64083 ) ( 0.35 0 0.64593 ) ( 0.4131 0 0.625 ) ( 0.46413 0 0.625 ) ( 0.54318 0 0.675 ) ( 0.62425 0 0.725 ) ( 0.70788 0 0.775 ) ( 0.88533 0 0.875 ) ( 1.0849 0 0.975 ) ( 1.199 0 1.025 ) ( 1.3 0 1.0515 ) ( 3.7527 0 0.45 ) ( 3.7579 0 0.35 ) ( 3.8041 0 0.25 ) );
+        includeOutOfBounds true;
+    }
+    probes_601
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_601;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( -0.7931 -0.2 0.15 ) ( -0.75835 -0.4 0.15 ) ( -0.67163 -0.6 0.15 ) ( -0.52625 -0.8 0.15 ) ( 0.5 -0.88055 0.15 ) ( 0.7 -0.88325 0.15 ) ( 0.9 -0.8892 0.15 ) ( 1.1 -0.89323 0.15 ) ( 1.3 -0.89528 0.15 ) ( 1.5 -0.8954 0.15 ) ( 1.7 -0.89355 0.15 ) ( 1.9 -0.8897 0.15 ) ( 2.1 -0.88378 0.15 ) ( 2.3 -0.88398 0.15 ) ( 3.3 -0.83078 0.15 ) ( 3.5 -0.77773 0.15 ) ( 3.6568 -0.7 0.15 ) ( 3.7125 -0.6 0.15 ) ( 3.7654 -0.4 0.15 ) ( 3.7913 -0.2 0.15 ) );
+        includeOutOfBounds true;
+    }
+    probes_602
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_602;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( 1.1 -0.68175 0.875 ) ( 1.3 -0.63023 0.975 ) ( 1.1 -0.72363 0.775 ) ( 1.3 -0.68185 0.875 ) ( 1.1 -0.76153 0.675 ) ( 1.3 -0.76635 0.675 ) ( 1.3 -0.7288 0.775 ) ( 1.5 -0.76913 0.675 ) ( 1.5 -0.73185 0.775 ) ( 1.5 -0.6852 0.875 ) ( 1.5 -0.62805 0.975 ) );
+        includeOutOfBounds true;
+    }
+    probes_603
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_603;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( 0.5535 -0.2 0.675 ) ( 0.71828 -0.2 0.775 ) ( 0.8958 -0.2 0.875 ) ( 1.0959 -0.2 0.975 ) ( 0.5892 -0.4 0.675 ) ( 0.75438 -0.4 0.775 ) ( 0.93243 -0.4 0.875 ) ( 1.1349 -0.4 0.975 ) ( 0.6611 -0.6 0.675 ) ( 0.82765 -0.6 0.775 ) ( 1.0079 -0.6 0.875 ) );
+        includeOutOfBounds true;
+    }
+    probes_604
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_604;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( 1.9 0 1.1024 ) ( 2.1 0 1.10028 ) ( 2.3 0 1.0903 ) ( 2.5 0 1.06715 ) ( 2.6 0 1.04775 ) ( 2.7 0 1.0177 ) ( 2.8201 0 0.975 ) ( 2.9444 0 0.925 ) ( 3.0579 0 0.875 ) ( 3.1642 0 0.825 ) ( 3.2652 0 0.775 ) ( 3.3 0 0.75733 ) ( 3.4 0 0.7461 ) ( 3.5 0 0.73535 ) ( 3.5753 0 0.725 ) ( 3.7 0 0.71745 ) ( 3.7097 0 0.65 ) ( 3.7153 0 0.6 ) ( 2.8037 -0.2 0.975 ) ( 3.0429 -0.2 0.875 ) ( 3.2513 -0.2 0.775 ) ( 3.5 -0.2 0.73148 ) ( 2.7436 -0.4 0.975 ) ( 2.9891 -0.4 0.875 ) ( 3.2009 -0.4 0.775 ) ( 3.5 -0.4 0.7212 ) ( 2.6195 -0.6 0.975 ) ( 2.7784 -0.6 0.925 ) );
+        includeOutOfBounds true;
+    }
+    probes_610
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_610;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( -0.8048 0 -0.103 ) ( 3.7993 0 0.15 ) ( -0.7248 0 0.3841 ) );
+        includeOutOfBounds true;
+    }
+    probes_611
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_611;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( -0.453 -0.8434 0.15 ) ( 0.375 -0.8878 0.15 ) ( 3.588 -0.748 0.15 ) ( 3.3 0.8308 0.15 ) ( 3.5 0.7777 0.15 ) ( 3.6568 0.7 0.15 ) ( -0.592 -0.7305 0.15 ) ( -0.394 -0.8599 0.15 ) ( 2.4 -0.8889 0.15 ) ( 3.208 -0.8555 0.15 ) ( 3.588 0.748 0.15 ) ( 3.765 0.4 0.15 ) );
+        includeOutOfBounds true;
+    }
+    probes_612
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_612;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( 1.02 -0.759 0.675 ) ( 1.02 -0.7411 0.725 ) ( 1.02 -0.7209 0.775 ) ( 1.1 -0.6988 0.83 ) ( 1.2 -0.6767 0.88 ) ( 1.3 -0.6545 0.925 ) ( 1.4 -0.6418 0.95 ) ( 1.2 -0.7065 0.82 ) ( 1.2 -0.7244 0.78 ) ( 1.4 -0.6812 0.88 ) ( 1.4 -0.7285 0.78 ) );
+        includeOutOfBounds true;
+    }
+    probes_613
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_613;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( 0.7282 -0.733 0.675 ) ( 0.8743 -0.7015 0.775 ) ( 1.0343 -0.6645 0.875 ) ( 1.219 -0.617 0.975 ) ( 1.0183 -0.6487 0.875 ) ( 1.06 -0.6758 0.875 ) );
+        includeOutOfBounds true;
+    }
+    probes_614
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_614;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( 3.3 -0.7824 0.5 ) ( 3.425 -0.7623 0.5 ) ( 3.525 -0.7433 0.5 ) ( 3.5995 -0.69 0.5 ) ( 3.6462 -0.6 0.5 ) ( 3.3 0.7824 0.5 ) ( 3.425 0.7623 0.5 ) ( 3.525 0.7433 0.5 ) ( 3.5995 0.69 0.5 ) ( 3.6462 0.6 0.5 ) );
+        includeOutOfBounds true;
+    }
+    probes_615
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_615;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( 2.9306 -0.6898 0.775 ) ( 3.0084 -0.6772 0.775 ) ( 3.0855 -0.6431 0.775 ) ( 2.7538 -0.6566 0.875 ) ( 2.8317 -0.6433 0.875 ) ( 2.8728 -0.6257 0.875 ) ( 2.5612 -0.6191 0.9638 ) ( 2.6642 -0.576 0.975 ) ( 3.0999 -0.5884 0.775 ) ( 2.8979 -0.5652 0.875 ) ( 2.6679 -0.5291 0.975 ) ( 3.0084 0.6772 0.775 ) ( 2.8317 0.6433 0.875 ) ( 2.6195 0.6 0.975 ) );
+        includeOutOfBounds true;
+    }
+    probes_624
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_624;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( -0.38029 -0.75 -0.115 ) ( -0.34304 -0.6 -0.115 ) ( -0.13 -0.479 -0.155 ) ( 0 -0.4734 -0.155 ) ( 0.13 -0.46781 -0.155 ) ( 0.3349 -0.50609 -0.115 ) ( 0.38479 -0.6 -0.115 ) ( 0.406 -0.75 -0.115 ) ( -0.37767 -0.75 0.04315 ) ( -0.35653 -0.75 0.199 ) ( -0.27273 -0.75 0.33181 ) ( -0.14305 -0.75 0.42067 ) ( 0.01068 -0.75 0.45254 ) ( 0.16446 -0.75 0.42088 ) ( 0.29338 -0.75 0.33082 ) ( 0.37834 -0.75 0.1986 ) ( 0.40196 -0.75 0.04311 ) ( -0.33945 -0.6 0.03023 ) ( -0.31819 -0.6 0.17358 ) ( -0.24515 -0.6 0.29808 ) ( -0.12779 -0.6 0.38166 ) ( 0.0136 -0.6 0.40976 ) ( 0.15419 -0.6 0.37811 ) ( 0.27012 -0.6 0.29195 ) ( 0.35102 -0.6 0.17173 ) ( 0.37908 -0.6 0.03012 ) );
+        includeOutOfBounds true;
+    }
+    probes_625
+    {
+        type            patchProbes;
+        libs            ( "libsampling.so" );
+        name            probes_625;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          ( cp );
+        fixedLocations  true;
+        interpolationScheme cellPatchConstrained;
+        probeLocations  ( ( -0.7625 0 -0.1112 ) ( -0.72972 0 -0.115 ) ( -0.697 0 -0.11878 ) ( -0.6 0 -0.13 ) ( -0.4 0 -0.15313 ) ( -0.2 0 -0.16555 ) ( 0 0 -0.17072 ) ( 0.2 0 -0.17047 ) ( 0.58 0 0.2114 ) ( 0.9 0 0.1548 ) ( 1.1 0 0.10915 ) ( 1.5 0 0.08527 ) ( 1.7 0 0.07643 ) ( 1.9 0 0.067 ) ( 2.5 0 -0.08277 ) ( 2.7 0 -0.12343 ) ( 2.9 0 -0.11844 ) ( 3.1 0 -0.10417 ) ( 3.3 0 -0.08908 ) ( 3.5 0 -0.0685 ) ( 3.7 0 -0.03107 ) ( 0.54 -0.3393 -0.12 ) ( 0.75 -0.32845 -0.12 ) ( 1.1 -0.59 -0.15566 ) ( 1.5 -0.36 -0.15012 ) ( 0.4 -0.55 -0.1596 ) ( 0.5 -0.7 -0.1597 ) ( 0.54 -0.59 -0.1646 ) ( 0.75 -0.59 -0.16005 ) ( 1.1 -0.36 -0.15566 ) ( 1.5 -0.59 -0.15012 ) ( 2.4037 -0.74 -0.0971 ) ( 2.7932 -0.74 0.4615 ) ( 3.1729 -0.74 0.1852 ) );
+        includeOutOfBounds true;
+    }
+    wallShearStress
+    {
+        type            wallShearStress;
+        libs            ( "libfieldFunctionObjects.so" );
+        enabled         true;
+        writeControl    writeTime;
+        patches         ( "(Body.*|Closed.*|CTRL.*|Engine.*|Exhaust.*|Mirror.*|Notchback.*|OCDA.*|Powertrain|Wheel.*|Rimsfront|BrakeDiscfront|Tiresfront|Rimsrear|BrakeDiscrear|Tiresrear|Rimsfront_rota|Rimsrear_rota|BrakeDiscfront_rota|BrakeDiscrear_rota)" );
+    }
+}
+
+
+// ************************************************************************* //

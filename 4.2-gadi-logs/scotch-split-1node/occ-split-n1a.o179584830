@@ -1,0 +1,35 @@
+Loading OpenFOAM/2512
+  Loading requirement: openmpi/4.1.7
+stage=serial run=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-split-1node.20260922-140737 decompositionMethod=scotch nCores=104 endTime=40
+nCores          104;
+decompositionMethod scotch;
+endTime         40;
+decomposePar
+
+real	4m17.456s
+user	3m3.642s
+sys	0m53.395s
+restore 0 Directory
+stage=serial
+label=scotch-split-1node
+run=/scratch/vp91/pz7344/openfoam-occ-drivaer/runs/scotch-split-1node.20260922-140737
+decompositionMethod=scotch
+nCores=104
+endTime=40
+nProcessorDirs=104
+mesh=/scratch/vp91/pz7344/openfoam-occ-drivaer/mesh/polyMesh
+module=OpenFOAM/2512
+serial_jobid=179584830.gadi-pbs
+Finished decomposition in 127.25 s
+
+======================================================================================
+                  Resource Usage on 2026-09-22 16:17:20:
+   Job Id:             179584830.gadi-pbs
+   Project:            vp91
+   Exit Status:        0
+   Service Units:      2.35
+   NCPUs Requested:    16                  CPU Time Used: 00:03:59        
+   Memory Requested:   64.0GB                Memory Used: 46.02GB         
+   Walltime Requested: 00:20:00            Walltime Used: 00:04:24        
+   JobFS Requested:    100.0MB                JobFS Used: 0B              
+======================================================================================
