@@ -1,0 +1,30 @@
+#!/bin/bash
+#PBS -P 51401009
+#PBS -q normal
+#PBS -l place=excl
+#PBS -l walltime=00:20:00
+#PBS -j oe
+# SIGBUS 诊断第四轮：libfabric 内存注册缓存。复用第三轮的 stage.c（Allreduce + Alltoall，每阶段 stderr 打点），2 节点 256 rank。
+module load openfoam/2512
+R=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs
+W=$R/mpi-probe3.${PBS_JOBID%%.*}
+mkdir -p "$W"; cd "$W"
+cp "$R/mpi-probe2.25710497/stage.c" .
+cc -O2 -o stage stage.c || exit 1
+sort -u "$PBS_NODEFILE"
+echo "--- provider"
+MPICH_ENV_DISPLAY=1 MPICH_OFI_VERBOSE=1 mpirun -np 256 ./stage allreduce 2>&1 | grep -E -i "provider|FI_|MR_CACHE|OFI_NIC" | sort -u | head -20
+fi_info -l 2>/dev/null | head -10
+run() {  # label env...
+  local label=$1; shift
+  local rc=0
+  env "$@" mpirun -np 256 ./stage both > "$label.log" 2>&1 || rc=$?
+  printf '%-28s rc=%-3s before_finalize=%s after_finalize=%s | %s\n' "$label" "$rc" \
+    "$(grep -c '^STAGE before_finalize ' "$label.log")" "$(grep -c '^STAGE after_finalize ' "$label.log")" \
+    "$(grep -m1 'died from' "$label.log")"
+}
+for i in 1 2 3; do run "default-$i" X=1; done
+for i in 1 2 3; do run "monitor-memhooks-$i" FI_MR_CACHE_MONITOR=memhooks; done
+for i in 1 2 3; do run "monitor-uffd-$i" FI_MR_CACHE_MONITOR=userfaultfd; done
+for i in 1 2 3; do run "monitor-disabled-$i" FI_MR_CACHE_MONITOR=disabled; done
+for i in 1 2 3; do run "cache-max-0-$i" FI_MR_CACHE_MAX_COUNT=0; done

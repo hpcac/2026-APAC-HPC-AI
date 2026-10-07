@@ -1,0 +1,65 @@
+=== 2026-10-06T14:42:40+08:00 stage=parallel label=scotch-split-2node decomp=scotch nCores=256 endTime=80 job=25702989.pbs101
+nodes:
+  x1001c2s4b1n1.hostmgmt2001.cm.asp2a.nscc.sg
+  x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+
+renumberMesh
+step=renumberMesh rc=143 wall=53s
+--- renumberMesh: rc=143 after End; tail of logFiles/20_renumberMesh.log:
+    TotalTime = 6.676677803 s
+    
+    ExecutionTime = 6.75 s  ClockTime = 31 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 216 died from signal 7
+
+potentialFoam
+step=potentialFoam rc=143 wall=34s
+--- potentialFoam: rc=143 after End; tail of logFiles/30_potentialFoam.log:
+    Continuity error = 2.747029307495983e-11
+    Interpolated velocity error = 0.0001035465726190113
+    ExecutionTime = 26.46 s  ClockTime = 28 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 213 died from signal 7
+
+applyBoundaryLayer
+step=applyBoundaryLayer rc=135 wall=14s
+--- applyBoundaryLayer: rc=135 after End; tail of logFiles/40_applyBoundaryLayer.log:
+    
+    
+    ExecutionTime = 3.54 s  ClockTime = 4 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 133 died from signal 7
+
+simpleFoam
+step=simpleFoam rc=135 wall=648s
+--- simpleFoam: rc=135 after End; tail of logFiles/50_simpleFoam.2026-10-06_14-42-40.log:
+        Average wall-clock time per time step = 7.423077852215192
+        Standard deviation of wall-clock time per time step = 0.2056965411821254
+        Minimum number of measured time steps for 2% error at 95% confidence level = 7
+    
+    End
+    
+    Finalising parallel run
+    x1001c2s4b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 81 died from signal 7
+stage=parallel
+label=scotch-split-2node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/scotch-split-2node.25702988
+decompositionMethod=scotch
+nCores=256
+endTime=80
+module=openfoam/2512
+jobid=25702989.pbs101
+serial_jobid=25702988.pbs101
+Cd=3.2712980974126155e-01
+nProcs : 256
+    Average wall-clock time per time step = 7.423077852215192
+=== 2026-10-06T14:55:09+08:00 done

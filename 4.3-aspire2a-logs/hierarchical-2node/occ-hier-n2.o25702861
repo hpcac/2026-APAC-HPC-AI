@@ -1,0 +1,75 @@
+=== 2026-10-06T14:26:25+08:00 stage=all label=hierarchical-2node decomp=hierarchical nCores=256 endTime=80 job=25702861.pbs101
+nodes:
+  x1001c2s2b1n1.hostmgmt2001.cm.asp2a.nscc.sg
+  x1001c2s7b1n1.hostmgmt2001.cm.asp2a.nscc.sg
+nCores          256;
+decompositionMethod hierarchical;
+nHierarchical   ( 16 8 2 );
+endTime         80;
+
+decomposePar
+step=decomposePar rc=0 wall=176s
+
+restore 0 Directory
+Restore 0/ from 0.orig/  [processor dirs]
+
+renumberMesh
+step=renumberMesh rc=135 wall=51s
+--- renumberMesh: rc=135 after End; tail of logFiles/20_renumberMesh.log:
+    TotalTime = 5.947415483 s
+    
+    ExecutionTime = 32 s  ClockTime = 32 s
+    
+    End
+    
+    Finalising parallel run
+    x1001c2s2b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 5 died from signal 7
+
+potentialFoam
+step=potentialFoam rc=143 wall=32s
+--- potentialFoam: rc=143 after End; tail of logFiles/30_potentialFoam.log:
+    Continuity error = 0.0001970054536158445
+    Interpolated velocity error = 9.519243427779349e-05
+    ExecutionTime = 24.06 s  ClockTime = 25 s
+    
+    End
+    
+    Finalising parallel run
+    x1001c2s7b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 172 died from signal 7
+
+applyBoundaryLayer
+step=applyBoundaryLayer rc=135 wall=10s
+--- applyBoundaryLayer: rc=135 after End; tail of logFiles/40_applyBoundaryLayer.log:
+    
+    
+    ExecutionTime = 4.15 s  ClockTime = 4 s
+    
+    End
+    
+    Finalising parallel run
+    x1001c2s7b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 238 died from signal 7
+
+simpleFoam
+step=simpleFoam rc=135 wall=626s
+--- simpleFoam: rc=135 after End; tail of logFiles/50_simpleFoam.2026-10-06_14-29-29.log:
+        Average wall-clock time per time step = 7.117703453962024
+        Standard deviation of wall-clock time per time step = 0.1260007675591639
+        Minimum number of measured time steps for 2% error at 95% confidence level = 3
+    
+    End
+    
+    Finalising parallel run
+    x1001c2s2b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 40 died from signal 7
+stage=all
+label=hierarchical-2node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/hierarchical-2node.25702861
+decompositionMethod=hierarchical
+nCores=256
+nHierarchical=(16 8 2)
+endTime=80
+module=openfoam/2512
+jobid=25702861.pbs101
+Cd=3.3686897165236618e-01
+nProcs : 256
+    Average wall-clock time per time step = 7.117703453962024
+=== 2026-10-06T14:41:29+08:00 done

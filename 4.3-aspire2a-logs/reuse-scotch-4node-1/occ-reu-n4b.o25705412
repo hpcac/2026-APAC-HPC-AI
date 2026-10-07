@@ -1,0 +1,32 @@
+=== 2026-10-06T19:29:16+08:00 stage=reuse label=reuse-scotch-4node decomp=scotch nCores=512 endTime=150 job=25705412.pbs101
+nodes:
+  x1001c0s1b1n1.hostmgmt2001.cm.asp2a.nscc.sg
+  x1003c3s4b0n1.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c3s5b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c7s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg
+endTime         150;
+
+simpleFoam
+step=simpleFoam rc=143 wall=521s
+--- simpleFoam: rc=143 after End; tail of logFiles/50_simpleFoam.2026-10-06_19-29-21.log:
+        Average wall-clock time per time step = 3.292459079798657
+        Standard deviation of wall-clock time per time step = 0.2823998446599663
+        Minimum number of measured time steps for 2% error at 95% confidence level = 71
+    
+    End
+    
+    Finalising parallel run
+    x1003c7s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 459 died from signal 7
+stage=reuse
+label=reuse-scotch-4node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/reuse-scotch-4node.25705412
+decompositionMethod=scotch
+nCores=512
+endTime=150
+module=openfoam/2512
+jobid=25705412.pbs101
+src=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/scotch-split-4node.25702990
+Cd=2.8398300763231610e-01
+nProcs : 512
+    Average wall-clock time per time step = 3.292459079798657
+=== 2026-10-06T19:38:02+08:00 done

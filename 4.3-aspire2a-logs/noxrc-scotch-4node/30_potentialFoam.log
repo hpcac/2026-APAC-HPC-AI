@@ -1,0 +1,72 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : /var/run/palsd/a65a5a8a-44da-4b0f-80a8-5a025510b121/files/potentialFoam -initialiseUBCs -parallel
+Date   : Oct 07 2026
+Time   : 10:09:54
+Host   : x1001c2s7b1n0
+PID    : 873835
+I/O    : uncollated
+Case   : /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/noxrc-scotch-4node.25710711
+nProcs : 512
+Hosts  :
+(
+    (x1001c2s7b1n0 128)
+    (x1001c3s2b0n0 128)
+    (x1001c5s2b1n0 128)
+    (x1001c5s6b0n0 128)
+)
+Pstream initialized with:
+    node communication : on [type=host] (512 ranks, 4 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+potentialFlow: Operating solver in PISO mode
+
+Reading velocity field U
+
+Constructing pressure field p
+
+Constructing velocity potential field Phi
+
+No MRF models present
+
+
+Calculating potential flow
+GAMG:  Solving for Phi, Initial residual = 1, Final residual = 0.001143070498278157, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 0.02197292676063314, Final residual = 3.913052736596381e-07, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 0.0004215174598733369, Final residual = 7.517503577191703e-09, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 1.865237666940316e-05, Final residual = 2.981930157318587e-10, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 1.764355275564055e-06, Final residual = 3.401971618466566e-11, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 2.087164572078425e-07, Final residual = 4.590339766901343e-12, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 3.038872835631742e-08, Final residual = 2.845106141865621e-12, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 6.711208920072616e-09, Final residual = 1.89742023596259e-12, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 2.34863806876385e-09, Final residual = 1.254838576179859e-12, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 1.198531098505657e-09, Final residual = 6.292157802073761e-13, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 7.442060079624212e-10, Final residual = 4.117627129471241e-13, No Iterations 12
+Continuity error = 2.543326922427667e-11
+Interpolated velocity error = 0.0001039491027352197
+ExecutionTime = 12.2 s  ClockTime = 12 s
+
+End
+
+Finalising parallel run

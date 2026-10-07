@@ -1,0 +1,225 @@
+PE 0: MPICH WARNING: Conflicting env variable settings.  Setting FI_VERBS_PREFER_XRC requires FI_OFI_RXM_USE_SRX=1.  Disabling XRC. 
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : /var/run/palsd/9701288c-b42f-4a4b-a38f-443c0d4172fc/files/simpleFoam -parallel
+Date   : Oct 07 2026
+Time   : 09:23:30
+Host   : x1002c2s6b1n0
+PID    : 2060400
+I/O    : uncollated
+Case   : /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-2node.25710674
+nProcs : 256
+Hosts  :
+(
+    (x1002c2s6b1n0 128)
+    (x1002c2s7b0n1 128)
+)
+Pstream initialized with:
+    node communication : on [type=host] (256 ranks, 2 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+SIMPLE: no convergence criteria found. Calculations will run for 3 steps.
+
+Reading field p
+
+Reading field U
+
+Reading/calculating face flux field phi
+
+Selecting incompressible transport model Newtonian
+Selecting turbulence model type RAS
+Selecting RAS turbulence model kOmegaSST
+Selecting patchDistMethod meshWave
+RAS
+{
+    RASModel        kOmegaSST;
+    turbulence      on;
+    printCoeffs     on;
+    alphaK1         0.85;
+    alphaK2         1;
+    alphaOmega1     0.5;
+    alphaOmega2     0.856;
+    gamma1          0.5555555555555556;
+    gamma2          0.44;
+    beta1           0.075;
+    beta2           0.0828;
+    betaStar        0.09;
+    a1              0.31;
+    b1              1;
+    c1              10;
+    F3              false;
+    decayControl    false;
+    kInf            0;
+    omegaInf        0;
+}
+
+No MRF models present
+
+Creating finite-volume options from "system/fvOptions"
+
+Selecting finite volume options type velocityDampingConstraint
+    Source: velocityDamping
+    State: active
+    - selecting all cells
+    - selected 65334765 cell(s) with volume 105593.550356506
+
+Starting time loop
+
+Using dynamicCode for functionObject wallClockTimeStatistics at line 95 in "/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-2node.25710674/system/controlDict/functions/wallClockTimeStatistics"
+Could not load "/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-2node.25710674/dynamicCode/platforms/linux64GccDPInt32Opt/lib/libwallClockTimeStatistics_6e8d888ad28997c1bc9eebd1c08a1a15774516a4.so"
+/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-2node.25710674/dynamicCode/platforms/linux64GccDPInt32Opt/lib/libwallClockTimeStatistics_6e8d888ad28997c1bc9eebd1c08a1a15774516a4.so: cannot open shared object file: No such file or directory
+Creating new library in "dynamicCode/wallClockTimeStatistics/platforms/linux64GccDPInt32Opt/lib/libwallClockTimeStatistics_6e8d888ad28997c1bc9eebd1c08a1a15774516a4.so"
+Invoking wmake libso /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-2node.25710674/dynamicCode/wallClockTimeStatistics
+wmake libso /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-2node.25710674/dynamicCode/wallClockTimeStatistics
+    ln: ./lnInclude
+    dep: functionObjectTemplate.C
+    Ctoo: functionObjectTemplate.C
+    link: /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-2node.25710674/dynamicCode/wallClockTimeStatistics/../platforms/linux64GccDPInt32Opt/lib/libwallClockTimeStatistics_6e8d888ad28997c1bc9eebd1c08a1a15774516a4.so
+forceCoeffs forceCoeffsAll:
+    rho: rhoInf
+    Freestream density (rhoInf) set to 1
+    Not including porosity effects
+    magUInf: 38.889
+    lRef   : 2.78618
+    Aref   : 2.17
+    rhoInf : 1
+    Selecting all coefficients
+    - Drag force: Cd
+    - Drag force front: Cd(f)
+    - Drag force rear: Cd(r)
+    - Lift force: Cl
+    - Lift force front: Cl(f)
+    - Lift force rear: Cl(r)
+    - Pitch moment: CmPitch
+    - Roll moment: CmRoll
+    - Yaw moment: CmYaw
+    - Side force: Cs
+    - Side force front: Cs(f)
+    - Side force rear: Cs(r)
+
+
+pressure calc_cp:
+    Operating mode: staticCoeff
+    Not including hydrostatic effects
+
+wallShearStress wallShearStress:
+    processing (47) wall patches:
+        BodyA-Pillar
+        BodyDoorhandles
+        BodyFasciafront1
+        BodyFasciafront2
+        BodyFender
+        BodyHeadlamps
+        BodyHood
+        BodyRear
+        BodyRearAccess
+        BodyRocker
+        BodyRoof
+        BodySide
+        BodyWindowfront
+        BodyWindowfrontframe
+        BodyWindowSide
+        BodyWindowsideframe
+        Mirrors1
+        Mirrors2
+        ClosedGrillLowerInsert
+        ClosedGrillUpperInsert
+        OCDADetailedUnderbody
+        EngineUndershield
+        Tiresfront
+        Tiresrear
+        WheelSupportfront1
+        WheelSupportfront2
+        WheelSupportrear
+        Powertrain
+        ExhaustSystem1
+        ExhaustSystem2
+        ExhaustSystem3
+        NotchbackB-Pillar
+        NotchbackBodyside
+        NotchbackC-Pillar
+        NotchbackRoof
+        NotchbackTrunk
+        NotchbackWindowrear
+        NotchbackWindowrearframe
+        NotchbackWindowside
+        NotchbackWindowsideframe
+        CTRL_SURFACE_Outlet
+        CTRL_SURFACE_Wheelhouse_LHS
+        CTRL_SURFACE_Wheelshouse_RHS
+        Rimsfront
+        Rimsrear
+        BrakeDiscfront
+        BrakeDiscrear
+
+Time = 1
+
+velocityDampingConstraint velocityDamping damped 12 (0%) of cells, with max limit 300
+smoothSolver:  Solving for Ux, Initial residual = 0.006749064200820558, Final residual = 0.0003266778669455964, No Iterations 15
+smoothSolver:  Solving for Uy, Initial residual = 0.4370732957504525, Final residual = 0.01095028670376519, No Iterations 15
+smoothSolver:  Solving for Uz, Initial residual = 0.2978724244807253, Final residual = 0.008142749447018283, No Iterations 15
+GAMG:  Solving for p, Initial residual = 1, Final residual = 0.002165748648095737, No Iterations 12
+time step continuity errors : sum local = 1.568211205049563e-05, global = 1.207174408872407e-05, cumulative = 1.207174408872407e-05
+smoothSolver:  Solving for omega, Initial residual = 0.01761762790581957, Final residual = 1.332702316839917e-06, No Iterations 8
+bounding omega, min: -417.5018491844005 max: 45356108.67437508 average: 2415.85613759777
+smoothSolver:  Solving for k, Initial residual = 0.9999999999996549, Final residual = 0.0002209438490164144, No Iterations 8
+ExecutionTime = 18.19 s  ClockTime = 55 s
+
+Time = 2
+
+velocityDampingConstraint velocityDamping damped 0 (0%) of cells, with max limit 300
+smoothSolver:  Solving for Ux, Initial residual = 0.00332108821697206, Final residual = 0.00012981654950674, No Iterations 15
+smoothSolver:  Solving for Uy, Initial residual = 0.1624752566200222, Final residual = 0.00605826690720947, No Iterations 15
+smoothSolver:  Solving for Uz, Initial residual = 0.07467958973757274, Final residual = 0.002716493927369171, No Iterations 15
+GAMG:  Solving for p, Initial residual = 0.005783425979455128, Final residual = 5.670398540835679e-06, No Iterations 12
+time step continuity errors : sum local = 4.913581259548095e-06, global = -3.275208198752846e-06, cumulative = 8.796535889971219e-06
+smoothSolver:  Solving for omega, Initial residual = 0.007594251918174084, Final residual = 2.176091306617396e-06, No Iterations 8
+smoothSolver:  Solving for k, Initial residual = 0.1592125331835285, Final residual = 8.434674341875651e-05, No Iterations 8
+ExecutionTime = 24.89 s  ClockTime = 61 s
+
+Wall-clock time elapsed during the current time step = 6.813942006 s
+
+Time = 3
+
+velocityDampingConstraint velocityDamping damped 0 (0%) of cells, with max limit 300
+smoothSolver:  Solving for Ux, Initial residual = 0.001753885337578803, Final residual = 6.417785977670596e-05, No Iterations 15
+smoothSolver:  Solving for Uy, Initial residual = 0.09265342908469636, Final residual = 0.003718531970472491, No Iterations 15
+smoothSolver:  Solving for Uz, Initial residual = 0.03123606633073949, Final residual = 0.001106851641527455, No Iterations 15
+GAMG:  Solving for p, Initial residual = 0.005266921120912425, Final residual = 4.189725779007912e-06, No Iterations 12
+time step continuity errors : sum local = 3.647537147213077e-06, global = -2.913686564223029e-06, cumulative = 5.88284932574819e-06
+smoothSolver:  Solving for omega, Initial residual = 0.003710457915638469, Final residual = 2.346460342984792e-06, No Iterations 8
+smoothSolver:  Solving for k, Initial residual = 0.05417039974052398, Final residual = 4.835971636183772e-05, No Iterations 8
+ExecutionTime = 31.56 s  ClockTime = 68 s
+
+Wall-clock time elapsed during the current time step = 6.725023223 s
+
+Statistics:
+    Number of measured time steps = 2
+    Average wall-clock time per time step = 6.7694826145
+    Standard deviation of wall-clock time per time step = 0.04445939150000022
+    Minimum number of measured time steps for 2% error at 95% confidence level = 0
+
+End
+
+Finalising parallel run

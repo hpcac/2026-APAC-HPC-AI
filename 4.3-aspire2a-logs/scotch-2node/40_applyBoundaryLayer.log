@@ -1,0 +1,58 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : /var/run/palsd/4b016acd-b9e3-4baf-af90-0e913ba6a22c/files/applyBoundaryLayer -ybl 0.0450244 -parallel
+Date   : Oct 06 2026
+Time   : 14:43:06
+Host   : x1003c3s1b0n1
+PID    : 1211031
+I/O    : uncollated
+Case   : /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/scotch-2node.25702862
+nProcs : 256
+Hosts  :
+(
+    (x1003c3s1b0n1 128)
+    (x1003c6s1b1n1 128)
+)
+Pstream initialized with:
+    node communication : on [type=host] (256 ranks, 2 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Reading field U
+
+Calculating wall distance field
+Selecting patchDistMethod meshWave
+
+Creating boundary-layer for U of thickness 0.0450244 m
+
+Creating mask field
+Setting boundary layer velocity
+
+Writing U
+
+
+ExecutionTime = 4.09 s  ClockTime = 4 s
+
+End
+
+Finalising parallel run
+x1003c6s1b1n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 215 died from signal 7

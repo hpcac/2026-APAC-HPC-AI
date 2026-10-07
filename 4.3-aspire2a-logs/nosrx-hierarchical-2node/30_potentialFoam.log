@@ -1,0 +1,71 @@
+PE 0: MPICH WARNING: Conflicting env variable settings.  Setting FI_VERBS_PREFER_XRC requires FI_OFI_RXM_USE_SRX=1.  Disabling XRC. 
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : /var/run/palsd/68700e10-d88c-4b1c-95eb-8bc13b0bccd4/files/potentialFoam -initialiseUBCs -parallel
+Date   : Oct 07 2026
+Time   : 09:36:10
+Host   : x1001c1s5b1n0
+PID    : 993595
+I/O    : uncollated
+Case   : /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-hierarchical-2node.25710715
+nProcs : 256
+Hosts  :
+(
+    (x1001c1s5b1n0 128)
+    (x1001c2s5b1n1 128)
+)
+Pstream initialized with:
+    node communication : on [type=host] (256 ranks, 2 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+potentialFlow: Operating solver in PISO mode
+
+Reading velocity field U
+
+Constructing pressure field p
+
+Constructing velocity potential field Phi
+
+No MRF models present
+
+
+Calculating potential flow
+GAMG:  Solving for Phi, Initial residual = 1, Final residual = 0.900266934502934, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 0.03089396373788659, Final residual = 0.002881490805993308, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 0.006318616487983002, Final residual = 0.001166351691125031, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 0.002818005223821455, Final residual = 0.0005229746664771054, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 0.001328695620071738, Final residual = 0.0002465331922905146, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 0.0006387355198950499, Final residual = 0.0001185982200372562, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 0.0003115267066286, Final residual = 5.756661579280061e-05, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 0.0001524779052984452, Final residual = 2.807166339117219e-05, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 7.476641894479991e-05, Final residual = 1.372162695268765e-05, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 3.668600864624154e-05, Final residual = 6.715789562589137e-06, No Iterations 12
+GAMG:  Solving for Phi, Initial residual = 1.800679157759418e-05, Final residual = 3.289210418570417e-06, No Iterations 12
+Continuity error = 0.0001970054536158445
+Interpolated velocity error = 9.519243427779349e-05
+ExecutionTime = 31.55 s  ClockTime = 31 s
+
+End
+
+Finalising parallel run

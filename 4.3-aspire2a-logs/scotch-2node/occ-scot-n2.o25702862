@@ -1,0 +1,73 @@
+=== 2026-10-06T14:36:16+08:00 stage=all label=scotch-2node decomp=scotch nCores=256 endTime=80 job=25702862.pbs101
+nodes:
+  x1003c3s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c6s1b1n1.hostmgmt2003.cm.asp2a.nscc.sg
+nCores          256;
+decompositionMethod scotch;
+endTime         80;
+
+decomposePar
+step=decomposePar rc=0 wall=319s
+
+restore 0 Directory
+Restore 0/ from 0.orig/  [processor dirs]
+
+renumberMesh
+step=renumberMesh rc=143 wall=49s
+--- renumberMesh: rc=143 after End; tail of logFiles/20_renumberMesh.log:
+    TotalTime = 5.561475853 s
+    
+    ExecutionTime = 29.61 s  ClockTime = 30 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c3s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 106 died from signal 7
+
+potentialFoam
+step=potentialFoam rc=143 wall=33s
+--- potentialFoam: rc=143 after End; tail of logFiles/30_potentialFoam.log:
+    Continuity error = 2.747029307495983e-11
+    Interpolated velocity error = 0.0001035465726190113
+    ExecutionTime = 26.09 s  ClockTime = 27 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c3s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 6 died from signal 7
+
+applyBoundaryLayer
+step=applyBoundaryLayer rc=143 wall=11s
+--- applyBoundaryLayer: rc=143 after End; tail of logFiles/40_applyBoundaryLayer.log:
+    
+    
+    ExecutionTime = 4.09 s  ClockTime = 4 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c6s1b1n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 215 died from signal 7
+
+simpleFoam
+step=simpleFoam rc=135 wall=631s
+--- simpleFoam: rc=135 after End; tail of logFiles/50_simpleFoam.2026-10-06_14-41-41.log:
+        Average wall-clock time per time step = 7.195927927936711
+        Standard deviation of wall-clock time per time step = 0.1525818754712837
+        Minimum number of measured time steps for 2% error at 95% confidence level = 4
+    
+    End
+    
+    Finalising parallel run
+    x1003c3s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 12 died from signal 7
+stage=all
+label=scotch-2node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/scotch-2node.25702862
+decompositionMethod=scotch
+nCores=256
+endTime=80
+module=openfoam/2512
+jobid=25702862.pbs101
+Cd=3.2712980974126155e-01
+nProcs : 256
+    Average wall-clock time per time step = 7.195927927936711
+=== 2026-10-06T14:53:45+08:00 done

@@ -1,0 +1,77 @@
+=== 2026-10-06T18:57:55+08:00 stage=all label=hierarchical-4node decomp=hierarchical nCores=512 endTime=150 job=25705409.pbs101
+nodes:
+  x1001c0s1b1n1.hostmgmt2001.cm.asp2a.nscc.sg
+  x1003c3s5b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c7s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c7s2b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+nCores          512;
+decompositionMethod hierarchical;
+nHierarchical   ( 16 8 4 );
+endTime         150;
+
+decomposePar
+step=decomposePar rc=0 wall=182s
+
+restore 0 Directory
+Restore 0/ from 0.orig/  [processor dirs]
+
+renumberMesh
+step=renumberMesh rc=135 wall=39s
+--- renumberMesh: rc=135 after End; tail of logFiles/20_renumberMesh.log:
+    TotalTime = 3.968016699 s
+    
+    ExecutionTime = 20.25 s  ClockTime = 20 s
+    
+    End
+    
+    Finalising parallel run
+    x1001c0s1b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 5 died from signal 7
+
+potentialFoam
+step=potentialFoam rc=143 wall=20s
+--- potentialFoam: rc=143 after End; tail of logFiles/30_potentialFoam.log:
+    Continuity error = 0.0002389860409653438
+    Interpolated velocity error = 9.504455212290656e-05
+    ExecutionTime = 13.58 s  ClockTime = 14 s
+    
+    End
+    
+    Finalising parallel run
+    x1001c0s1b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 60 died from signal 7
+
+applyBoundaryLayer
+step=applyBoundaryLayer rc=143 wall=9s
+--- applyBoundaryLayer: rc=143 after End; tail of logFiles/40_applyBoundaryLayer.log:
+    
+    
+    ExecutionTime = 2.89 s  ClockTime = 3 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c7s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 343 died from signal 7
+
+simpleFoam
+step=simpleFoam rc=135 wall=557s
+--- simpleFoam: rc=135 after End; tail of logFiles/50_simpleFoam.2026-10-06_19-01-06.log:
+        Average wall-clock time per time step = 3.414516988161072
+        Standard deviation of wall-clock time per time step = 0.05784864082372638
+        Minimum number of measured time steps for 2% error at 95% confidence level = 3
+    
+    End
+    
+    Finalising parallel run
+    x1001c0s1b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 7 died from signal 7
+stage=all
+label=hierarchical-4node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/hierarchical-4node.25705409
+decompositionMethod=hierarchical
+nCores=512
+nHierarchical=(16 8 4)
+endTime=150
+module=openfoam/2512
+jobid=25705409.pbs101
+Cd=2.7391974323989648e-01
+nProcs : 512
+    Average wall-clock time per time step = 3.414516988161072
+=== 2026-10-06T19:11:31+08:00 done

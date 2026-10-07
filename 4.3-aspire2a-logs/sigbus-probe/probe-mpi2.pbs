@@ -1,0 +1,63 @@
+#!/bin/bash
+#PBS -P 51401009
+#PBS -q normal
+#PBS -l place=excl
+#PBS -l walltime=00:20:00
+#PBS -j oe
+# SIGBUS 诊断第三轮：每个 rank 在每个阶段往 stderr 打一行，数出死在哪一步。
+# 模式：allreduce / alltoall / both。2 节点各 3 次；同样程序在 1 节点上（128 rank）各 1 次。
+module load openfoam/2512
+W=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/mpi-probe2.${PBS_JOBID%%.*}
+mkdir -p "$W"; cd "$W"
+cat > stage.c <<'EOF'
+#include <mpi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+static int r;
+static void mark(const char *s) { fprintf(stderr, "STAGE %s %d\n", s, r); fflush(stderr); }
+int main(int argc, char **argv) {
+  int n;
+  const char *mode = argc > 1 ? argv[1] : "both";
+  MPI_Init(&argc, &argv);
+  MPI_Comm_rank(MPI_COMM_WORLD, &r);
+  MPI_Comm_size(MPI_COMM_WORLD, &n);
+  mark("init");
+  if (strcmp(mode, "alltoall") != 0) {
+    double x = r, s;
+    MPI_Allreduce(&x, &s, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+    mark("allreduce");
+  }
+  if (strcmp(mode, "allreduce") != 0) {
+    size_t per = 16384;
+    char *a = malloc(per * n), *b = malloc(per * n);
+    memset(a, r & 0xff, per * n);
+    MPI_Alltoall(a, per, MPI_CHAR, b, per, MPI_CHAR, MPI_COMM_WORLD);
+    mark("alltoall");
+    free(a); free(b);
+  }
+  MPI_Barrier(MPI_COMM_WORLD);
+  mark("before_finalize");
+  MPI_Finalize();
+  mark("after_finalize");
+  return 0;
+}
+EOF
+cc -O2 -o stage stage.c || exit 1
+sort -u "$PBS_NODEFILE"
+first=$(sort -u "$PBS_NODEFILE" | head -1)
+run() {  # label np extra-mpirun-args mode
+  local label=$1 np=$2 extra=$3 mode=$4 rc=0
+  mpirun -np "$np" $extra ./stage "$mode" > "$label.log" 2>&1 || rc=$?
+  printf '%-22s rc=%-3s' "$label" "$rc"
+  for s in init allreduce alltoall before_finalize after_finalize; do
+    printf ' %s=%s' "$s" "$(grep -c "^STAGE $s " "$label.log")"
+  done
+  echo " | $(grep -m1 'died from' "$label.log")"
+}
+for mode in allreduce alltoall both; do
+  for i in 1 2 3; do run "2n-$mode-$i" 256 "" "$mode"; done
+done
+for mode in allreduce alltoall both; do
+  run "1n-$mode" 128 "--hosts $first" "$mode"
+done

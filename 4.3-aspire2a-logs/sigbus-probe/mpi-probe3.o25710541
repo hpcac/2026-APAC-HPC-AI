@@ -1,0 +1,48 @@
+x1002c4s0b1n1.hostmgmt2002.cm.asp2a.nscc.sg
+x1002c5s5b1n0.hostmgmt2002.cm.asp2a.nscc.sg
+--- provider
+PE 0:   FI_OFI_RXM_BUFFER_SIZE                         = 16384
+PE 0:   FI_OFI_RXM_RX_SIZE                             = 4096
+PE 0:   FI_OFI_RXM_SAR_LIMIT                           = 262144
+PE 0:   FI_OFI_RXM_USE_SRX                             = 1
+PE 0:   FI_VERBS_MIN_RNR_TIMER                         = 6
+PE 0:   FI_VERBS_PREFER_XRC                            = 1
+PE 0:   MPICH_CH4_OFI_ENABLE_CONTROL_AUTO_PROGRESS     = -1
+PE 0:   MPICH_CH4_OFI_ENABLE_DATA_AUTO_PROGRESS        = -1
+PE 0: MPICH CH4 OFI netmod using verbs;ofi_rxm provider (domain_name=mlx5_0-xrc, src_addr=10.150.8.198)
+PE 0:   MPICH_MPIIO_OFI_STARTUP_CONNECT                = disable
+PE 0:   MPICH_MPIIO_OFI_STARTUP_NODES_AGGREGATOR        = 2
+PE 0:   MPICH_OFI_NIC_MAPPING                          = NULL
+PE 0:   MPICH_OFI_NIC_POLICY                           = BLOCK
+PE 0:   MPICH_OFI_NIC_VERBOSE                          = 0
+PE 0:   MPICH_OFI_NUM_NICS                             = NULL
+PE 0:   MPICH_OFI_RMA_STARTUP_CONNECT                  = 0
+PE 0:   MPICH_OFI_SKIP_NIC_SYMMETRY_TEST               = 0
+PE 0:   MPICH_OFI_STARTUP_CONNECT                      = 0
+PE 0:   MPICH_OFI_USE_PROVIDER                         = verbs;ofi_rxm
+PE 0:   MPICH_OFI_VERBOSE                              = 1
+verbs:
+    version: 111.0
+ofi_rxm:
+    version: 111.0
+sockets:
+    version: 111.0
+ofi_hook_perf:
+    version: 111.0
+ofi_hook_debug:
+    version: 111.0
+default-1                    rc=143 before_finalize=256 after_finalize=0 | x1002c4s0b1n1.hostmgmt2002.cm.asp2a.nscc.sg: rank 48 died from signal 7
+default-2                    rc=143 before_finalize=256 after_finalize=0 | x1002c4s0b1n1.hostmgmt2002.cm.asp2a.nscc.sg: rank 30 died from signal 7
+default-3                    rc=135 before_finalize=256 after_finalize=0 | x1002c4s0b1n1.hostmgmt2002.cm.asp2a.nscc.sg: rank 8 died from signal 7
+monitor-memhooks-1           rc=143 before_finalize=256 after_finalize=0 | x1002c5s5b1n0.hostmgmt2002.cm.asp2a.nscc.sg: rank 169 died from signal 7
+monitor-memhooks-2           rc=143 before_finalize=256 after_finalize=0 | x1002c5s5b1n0.hostmgmt2002.cm.asp2a.nscc.sg: rank 147 died from signal 7
+monitor-memhooks-3           rc=143 before_finalize=256 after_finalize=0 | x1002c5s5b1n0.hostmgmt2002.cm.asp2a.nscc.sg: rank 169 died from signal 7
+monitor-uffd-1               rc=143 before_finalize=256 after_finalize=0 | x1002c5s5b1n0.hostmgmt2002.cm.asp2a.nscc.sg: rank 142 died from signal 7
+monitor-uffd-2               rc=143 before_finalize=256 after_finalize=0 | x1002c5s5b1n0.hostmgmt2002.cm.asp2a.nscc.sg: rank 140 died from signal 7
+monitor-uffd-3               rc=143 before_finalize=256 after_finalize=0 | x1002c4s0b1n1.hostmgmt2002.cm.asp2a.nscc.sg: rank 7 died from signal 7
+monitor-disabled-1           rc=143 before_finalize=256 after_finalize=0 | x1002c4s0b1n1.hostmgmt2002.cm.asp2a.nscc.sg: rank 100 died from signal 7
+monitor-disabled-2           rc=143 before_finalize=256 after_finalize=0 | x1002c4s0b1n1.hostmgmt2002.cm.asp2a.nscc.sg: rank 99 died from signal 7
+monitor-disabled-3           rc=143 before_finalize=256 after_finalize=0 | x1002c5s5b1n0.hostmgmt2002.cm.asp2a.nscc.sg: rank 191 died from signal 7
+cache-max-0-1                rc=143 before_finalize=256 after_finalize=0 | x1002c4s0b1n1.hostmgmt2002.cm.asp2a.nscc.sg: rank 48 died from signal 7
+cache-max-0-2                rc=143 before_finalize=256 after_finalize=0 | x1002c5s5b1n0.hostmgmt2002.cm.asp2a.nscc.sg: rank 218 died from signal 7
+cache-max-0-3                rc=143 before_finalize=256 after_finalize=0 | x1002c5s5b1n0.hostmgmt2002.cm.asp2a.nscc.sg: rank 137 died from signal 7

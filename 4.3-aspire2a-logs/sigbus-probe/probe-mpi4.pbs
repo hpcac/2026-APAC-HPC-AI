@@ -1,0 +1,52 @@
+#!/bin/bash
+#PBS -P 51401009
+#PBS -q normal
+#PBS -l place=excl
+#PBS -l walltime=00:20:00
+#PBS -j oe
+# SIGBUS 诊断第五轮：verbs;ofi_rxm（mlx5 XRC）上哪一层触发 Finalize 里的 signal 7。2 节点 256 rank，Alltoall 后 Finalize。
+module load openfoam/2512
+R=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs
+W=$R/mpi-probe4.${PBS_JOBID%%.*}
+mkdir -p "$W"; cd "$W"
+cat > a2a.c <<'EOF'
+#include <mpi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+static int r;
+static void mark(const char *s) { fprintf(stderr, "STAGE %s %d\n", s, r); fflush(stderr); }
+int main(int argc, char **argv) {
+  int n;
+  size_t per = argc > 1 ? strtoul(argv[1], 0, 10) : 16384;
+  MPI_Init(&argc, &argv);
+  MPI_Comm_rank(MPI_COMM_WORLD, &r);
+  MPI_Comm_size(MPI_COMM_WORLD, &n);
+  char *a = malloc(per * n), *b = malloc(per * n);
+  memset(a, r & 0xff, per * n);
+  MPI_Alltoall(a, per, MPI_CHAR, b, per, MPI_CHAR, MPI_COMM_WORLD);
+  free(a); free(b);
+  MPI_Barrier(MPI_COMM_WORLD);
+  mark("before_finalize");
+  MPI_Finalize();
+  mark("after_finalize");
+  return 0;
+}
+EOF
+cc -O2 -o a2a a2a.c || exit 1
+sort -u "$PBS_NODEFILE"
+run() {  # label bytes env...
+  local label=$1 bytes=$2; shift 2
+  local rc=0
+  env "$@" timeout 120 mpirun -np 256 ./a2a "$bytes" > "$label.log" 2>&1 || rc=$?
+  printf '%-26s rc=%-3s before_finalize=%-3s after_finalize=%-3s | %s %s\n' "$label" "$rc" \
+    "$(grep -c '^STAGE before_finalize ' "$label.log")" "$(grep -c '^STAGE after_finalize ' "$label.log")" \
+    "$(grep -m1 'died from' "$label.log")" "$(grep -m1 -i -E 'provider|error' "$label.log" | cut -c1-120)"
+}
+for i in 1 2 3; do run "default-16k-$i" 16384 X=1; done
+for i in 1 2 3; do run "eager-1k-$i" 1024 X=1; done
+for i in 1 2 3; do run "rxmbuf-64k-16k-$i" 16384 FI_OFI_RXM_BUFFER_SIZE=65536; done
+for i in 1 2 3; do run "noxrc-16k-$i" 16384 FI_VERBS_PREFER_XRC=0; done
+for i in 1 2 3; do run "nosrx-16k-$i" 16384 FI_OFI_RXM_USE_SRX=0; done
+for i in 1 2; do run "tcp-rxm-16k-$i" 16384 "MPICH_OFI_USE_PROVIDER=tcp;ofi_rxm" MPICH_OFI_VERBOSE=1; done
+for i in 1 2; do run "sockets-16k-$i" 16384 MPICH_OFI_USE_PROVIDER=sockets MPICH_OFI_VERBOSE=1; done

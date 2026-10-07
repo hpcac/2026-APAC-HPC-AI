@@ -1,0 +1,75 @@
+=== 2026-10-06T19:11:39+08:00 stage=all label=scotch-4node decomp=scotch nCores=512 endTime=150 job=25705410.pbs101
+nodes:
+  x1001c0s1b1n1.hostmgmt2001.cm.asp2a.nscc.sg
+  x1003c3s4b0n1.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c3s5b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c7s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg
+nCores          512;
+decompositionMethod scotch;
+endTime         150;
+
+decomposePar
+step=decomposePar rc=0 wall=391s
+
+restore 0 Directory
+Restore 0/ from 0.orig/  [processor dirs]
+
+renumberMesh
+step=renumberMesh rc=135 wall=57s
+--- renumberMesh: rc=135 after End; tail of logFiles/20_renumberMesh.log:
+    TotalTime = 3.898451307 s
+    
+    ExecutionTime = 29.81 s  ClockTime = 30 s
+    
+    End
+    
+    Finalising parallel run
+    x1001c0s1b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 97 died from signal 7
+
+potentialFoam
+step=potentialFoam rc=143 wall=19s
+--- potentialFoam: rc=143 after End; tail of logFiles/30_potentialFoam.log:
+    Continuity error = 2.543326922427667e-11
+    Interpolated velocity error = 0.0001039491027352197
+    ExecutionTime = 13.11 s  ClockTime = 13 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c3s5b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 307 died from signal 7
+
+applyBoundaryLayer
+step=applyBoundaryLayer rc=143 wall=9s
+--- applyBoundaryLayer: rc=143 after End; tail of logFiles/40_applyBoundaryLayer.log:
+    
+    
+    ExecutionTime = 2.37 s  ClockTime = 2 s
+    
+    End
+    
+    Finalising parallel run
+    x1001c0s1b1n1.hostmgmt2001.cm.asp2a.nscc.sg: rank 87 died from signal 7
+
+simpleFoam
+step=simpleFoam rc=143 wall=565s
+--- simpleFoam: rc=143 after End; tail of logFiles/50_simpleFoam.2026-10-06_19-18-18.log:
+        Average wall-clock time per time step = 3.575991440657719
+        Standard deviation of wall-clock time per time step = 0.1425570984587645
+        Minimum number of measured time steps for 2% error at 95% confidence level = 15
+    
+    End
+    
+    Finalising parallel run
+    x1003c3s4b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 252 died from signal 7
+stage=all
+label=scotch-4node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/scotch-4node.25705410
+decompositionMethod=scotch
+nCores=512
+endTime=150
+module=openfoam/2512
+jobid=25705410.pbs101
+Cd=2.8398300763231610e-01
+nProcs : 512
+    Average wall-clock time per time step = 3.575991440657719
+=== 2026-10-06T19:29:08+08:00 done

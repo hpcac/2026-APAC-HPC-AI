@@ -1,0 +1,23 @@
+=== 2026-10-07T09:44:51+08:00 stage=reuse label=reuse-noxrc-scotch-4node decomp=scotch nCores=512 endTime=150 job=25710713.pbs101
+nodes:
+  x1001c6s0b1n1.hostmgmt2001.cm.asp2a.nscc.sg
+  x1003c0s2b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c4s1b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c4s4b1n0.hostmgmt2003.cm.asp2a.nscc.sg
+endTime         150;
+
+simpleFoam
+step=simpleFoam rc=0 wall=545s
+stage=reuse
+label=reuse-noxrc-scotch-4node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/reuse-noxrc-scotch-4node.25710713
+decompositionMethod=scotch
+nCores=512
+endTime=150
+module=openfoam/2512
+jobid=25710713.pbs101
+src=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/scotch-split-4node.25702990
+Cd=2.8398300763231610e-01
+nProcs : 512
+    Average wall-clock time per time step = 3.220627539255034
+=== 2026-10-07T09:54:02+08:00 done

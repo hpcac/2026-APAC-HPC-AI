@@ -1,0 +1,38 @@
+=== 2026-10-06T14:06:44+08:00 stage=all label=smoke-1node decomp=hierarchical nCores=128 endTime=3 job=25702821.pbs101
+nodes:
+  x1002c7s1b1n1.hostmgmt2002.cm.asp2a.nscc.sg
+nCores          128;
+decompositionMethod hierarchical;
+nHierarchical   ( 16 4 2 );
+endTime         3;
+
+decomposePar
+step=decomposePar rc=0 wall=152s
+
+restore 0 Directory
+Restore 0/ from 0.orig/  [processor dirs]
+
+renumberMesh
+step=renumberMesh rc=0 wall=12s
+
+potentialFoam
+step=potentialFoam rc=0 wall=56s
+
+applyBoundaryLayer
+step=applyBoundaryLayer rc=0 wall=10s
+
+simpleFoam
+step=simpleFoam rc=0 wall=94s
+stage=all
+label=smoke-1node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/smoke-1node.25702821
+decompositionMethod=hierarchical
+nCores=128
+nHierarchical=(16 4 2)
+endTime=3
+module=openfoam/2512
+jobid=25702821.pbs101
+Cd=4.6148006350159798e-01
+nProcs : 128
+    Average wall-clock time per time step = 14.702099136
+=== 2026-10-06T14:12:13+08:00 done

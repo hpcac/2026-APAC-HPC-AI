@@ -1,0 +1,67 @@
+=== 2026-10-06T19:12:03+08:00 stage=parallel label=scotch-split-4node decomp=scotch nCores=512 endTime=150 job=25705411.pbs101
+nodes:
+  x1001c3s0b0n0.hostmgmt2001.cm.asp2a.nscc.sg
+  x1001c3s6b0n1.hostmgmt2001.cm.asp2a.nscc.sg
+  x1001c3s6b1n1.hostmgmt2001.cm.asp2a.nscc.sg
+  x1003c7s2b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+
+renumberMesh
+step=renumberMesh rc=135 wall=13s
+--- renumberMesh: rc=135 after End; tail of logFiles/20_renumberMesh.log:
+    TotalTime = 3.287781097 s
+    
+    ExecutionTime = 2.69 s  ClockTime = 4 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c7s2b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 395 died from signal 7
+
+potentialFoam
+step=potentialFoam rc=143 wall=19s
+--- potentialFoam: rc=143 after End; tail of logFiles/30_potentialFoam.log:
+    Continuity error = 2.543326922427667e-11
+    Interpolated velocity error = 0.0001039491027352197
+    ExecutionTime = 12.12 s  ClockTime = 12 s
+    
+    End
+    
+    Finalising parallel run
+    x1001c3s0b0n0.hostmgmt2001.cm.asp2a.nscc.sg: rank 99 died from signal 7
+
+applyBoundaryLayer
+step=applyBoundaryLayer rc=135 wall=8s
+--- applyBoundaryLayer: rc=135 after End; tail of logFiles/40_applyBoundaryLayer.log:
+    
+    
+    ExecutionTime = 2.1 s  ClockTime = 2 s
+    
+    End
+    
+    Finalising parallel run
+    x1003c7s2b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 491 died from signal 7
+
+simpleFoam
+step=simpleFoam rc=143 wall=522s
+--- simpleFoam: rc=143 after End; tail of logFiles/50_simpleFoam.2026-10-06_19-12-03.log:
+        Average wall-clock time per time step = 3.190657998959732
+        Standard deviation of wall-clock time per time step = 0.02155258195893488
+        Minimum number of measured time steps for 2% error at 95% confidence level = 0
+    
+    End
+    
+    Finalising parallel run
+    x1001c3s0b0n0.hostmgmt2001.cm.asp2a.nscc.sg: rank 87 died from signal 7
+stage=parallel
+label=scotch-split-4node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/scotch-split-4node.25702990
+decompositionMethod=scotch
+nCores=512
+endTime=150
+module=openfoam/2512
+jobid=25705411.pbs101
+serial_jobid=25702990.pbs101
+Cd=2.8398300763231610e-01
+nProcs : 512
+    Average wall-clock time per time step = 3.190657998959732
+=== 2026-10-06T19:21:25+08:00 done

@@ -1,0 +1,57 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : /var/run/palsd/f8f39843-8429-4ff5-968c-10ddf772602e/files/applyBoundaryLayer -ybl 0.0450244 -parallel
+Date   : Oct 07 2026
+Time   : 09:37:47
+Host   : x1002c2s6b1n0
+PID    : 2074960
+I/O    : uncollated
+Case   : /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/noxrc-scotch-2node.25710709
+nProcs : 256
+Hosts  :
+(
+    (x1002c2s6b1n0 128)
+    (x1002c2s7b0n1 128)
+)
+Pstream initialized with:
+    node communication : on [type=host] (256 ranks, 2 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Reading field U
+
+Calculating wall distance field
+Selecting patchDistMethod meshWave
+
+Creating boundary-layer for U of thickness 0.0450244 m
+
+Creating mask field
+Setting boundary layer velocity
+
+Writing U
+
+
+ExecutionTime = 3.7 s  ClockTime = 3 s
+
+End
+
+Finalising parallel run

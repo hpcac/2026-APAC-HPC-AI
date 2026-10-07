@@ -1,0 +1,72 @@
+PE 0: MPICH WARNING: Conflicting env variable settings.  Setting FI_VERBS_PREFER_XRC requires FI_OFI_RXM_USE_SRX=1.  Disabling XRC. 
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : /var/run/palsd/201cccc5-4545-4845-8d0b-0cadbd54bd36/files/renumberMesh -constant -overwrite -parallel
+Date   : Oct 07 2026
+Time   : 09:43:24
+Host   : x1002c2s4b1n0
+PID    : 2213125
+I/O    : uncollated
+Case   : /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-scotch-2node.25710716
+nProcs : 256
+Hosts  :
+(
+    (x1002c2s4b1n0 128)
+    (x1003c3s5b0n0 128)
+)
+Pstream initialized with:
+    node communication : on [type=host] (256 ranks, 2 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = constant
+
+Mesh region0 size: 65334765
+Before renumbering
+    band           : 255565
+    profile        : 385449386125
+
+Using renumber-method: CuthillMcKee [default]
+
+Reading fields
+
+Renumbering processor cell decomposition map cellProcAddressing
+Renumbering processor face decomposition map faceProcAddressing
+Renumbering processor point decomposition map pointProcAddressing
+After renumbering
+    band           : 15466
+    profile        : 282424563832
+
+Writing mesh to "constant"
+
+Timings:
+    read mesh   : 1.777064134
+    read fields : 0.189625389
+    decompose   : 0
+    cell-cells  : 0
+    renumber    : 0.137420978
+    write       : 0.779699184
+TotalTime = 4.188586937 s
+
+ExecutionTime = 20.72 s  ClockTime = 21 s
+
+End
+
+Finalising parallel run

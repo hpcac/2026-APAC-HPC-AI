@@ -1,0 +1,14 @@
+x1001c1s1b1n0.hostmgmt2001.cm.asp2a.nscc.sg
+x1003c5s7b1n0.hostmgmt2003.cm.asp2a.nscc.sg
+2n-allreduce-1         rc=0   init=256 allreduce=256 alltoall=0 before_finalize=256 after_finalize=256 | 
+2n-allreduce-2         rc=0   init=256 allreduce=256 alltoall=0 before_finalize=256 after_finalize=256 | 
+2n-allreduce-3         rc=0   init=256 allreduce=256 alltoall=0 before_finalize=256 after_finalize=256 | 
+2n-alltoall-1          rc=143 init=256 allreduce=0 alltoall=256 before_finalize=256 after_finalize=0 | x1001c1s1b1n0.hostmgmt2001.cm.asp2a.nscc.sg: rank 8 died from signal 7
+2n-alltoall-2          rc=143 init=256 allreduce=0 alltoall=256 before_finalize=256 after_finalize=0 | x1001c1s1b1n0.hostmgmt2001.cm.asp2a.nscc.sg: rank 4 died from signal 7
+2n-alltoall-3          rc=143 init=256 allreduce=0 alltoall=256 before_finalize=256 after_finalize=0 | x1001c1s1b1n0.hostmgmt2001.cm.asp2a.nscc.sg: rank 27 died from signal 7
+2n-both-1              rc=143 init=256 allreduce=256 alltoall=256 before_finalize=256 after_finalize=0 | x1001c1s1b1n0.hostmgmt2001.cm.asp2a.nscc.sg: rank 59 died from signal 7
+2n-both-2              rc=143 init=256 allreduce=256 alltoall=256 before_finalize=256 after_finalize=0 | x1001c1s1b1n0.hostmgmt2001.cm.asp2a.nscc.sg: rank 1 died from signal 7
+2n-both-3              rc=143 init=256 allreduce=256 alltoall=256 before_finalize=256 after_finalize=0 | x1001c1s1b1n0.hostmgmt2001.cm.asp2a.nscc.sg: rank 52 died from signal 7
+1n-allreduce           rc=0   init=128 allreduce=128 alltoall=0 before_finalize=128 after_finalize=128 | 
+1n-alltoall            rc=0   init=128 allreduce=0 alltoall=128 before_finalize=128 after_finalize=128 | 
+1n-both                rc=0   init=128 allreduce=128 alltoall=128 before_finalize=128 after_finalize=128 | 

@@ -1,0 +1,228 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : /var/run/palsd/9f505e62-526c-46ea-a436-41aee92c80f9/files/simpleFoam -parallel
+Date   : Oct 06 2026
+Time   : 14:10:42
+Host   : x1002c7s1b1n1
+PID    : 809012
+I/O    : uncollated
+Case   : /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/smoke-1node.25702821
+nProcs : 128
+Hosts  :
+(
+    (x1002c7s1b1n1 128)
+)
+Pstream initialized with:
+    node communication : off [type=host] (128 ranks, 1 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+SIMPLE: no convergence criteria found. Calculations will run for 3 steps.
+
+Reading field p
+
+Reading field U
+
+Reading/calculating face flux field phi
+
+Selecting incompressible transport model Newtonian
+Selecting turbulence model type RAS
+Selecting RAS turbulence model kOmegaSST
+Selecting patchDistMethod meshWave
+RAS
+{
+    RASModel        kOmegaSST;
+    turbulence      on;
+    printCoeffs     on;
+    alphaK1         0.85;
+    alphaK2         1;
+    alphaOmega1     0.5;
+    alphaOmega2     0.856;
+    gamma1          0.5555555555555556;
+    gamma2          0.44;
+    beta1           0.075;
+    beta2           0.0828;
+    betaStar        0.09;
+    a1              0.31;
+    b1              1;
+    c1              10;
+    F3              false;
+    decayControl    false;
+    kInf            0;
+    omegaInf        0;
+}
+
+No MRF models present
+
+Creating finite-volume options from "system/fvOptions"
+
+Selecting finite volume options type velocityDampingConstraint
+    Source: velocityDamping
+    State: active
+    - selecting all cells
+    - selected 65334765 cell(s) with volume 105593.5503564041
+
+Starting time loop
+
+Using dynamicCode for functionObject wallClockTimeStatistics at line 95 in "/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/smoke-1node.25702821/system/controlDict/functions/wallClockTimeStatistics"
+Creating new library in "dynamicCode/wallClockTimeStatistics/platforms/linux64GccDPInt32Opt/lib/libwallClockTimeStatistics_6e8d888ad28997c1bc9eebd1c08a1a15774516a4.so"
+Could not load "/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/smoke-1node.25702821/dynamicCode/platforms/linux64GccDPInt32Opt/lib/libwallClockTimeStatistics_6e8d888ad28997c1bc9eebd1c08a1a15774516a4.so"
+/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/smoke-1node.25702821/dynamicCode/platforms/linux64GccDPInt32Opt/lib/libwallClockTimeStatistics_6e8d888ad28997c1bc9eebd1c08a1a15774516a4.so: cannot open shared object file: No such file or directory
+Invoking wmake libso /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/smoke-1node.25702821/dynamicCode/wallClockTimeStatistics
+wmake libso /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/smoke-1node.25702821/dynamicCode/wallClockTimeStatistics
+    ln: ./lnInclude
+    dep: functionObjectTemplate.C
+    Ctoo: functionObjectTemplate.C
+    link: /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/smoke-1node.25702821/dynamicCode/wallClockTimeStatistics/../platforms/linux64GccDPInt32Opt/lib/libwallClockTimeStatistics_6e8d888ad28997c1bc9eebd1c08a1a15774516a4.so
+forceCoeffs forceCoeffsAll:
+    rho: rhoInf
+    Freestream density (rhoInf) set to 1
+    Not including porosity effects
+    magUInf: 38.889
+    lRef   : 2.78618
+    Aref   : 2.17
+    rhoInf : 1
+    Selecting all coefficients
+    - Drag force: Cd
+    - Drag force front: Cd(f)
+    - Drag force rear: Cd(r)
+    - Lift force: Cl
+    - Lift force front: Cl(f)
+    - Lift force rear: Cl(r)
+    - Pitch moment: CmPitch
+    - Roll moment: CmRoll
+    - Yaw moment: CmYaw
+    - Side force: Cs
+    - Side force front: Cs(f)
+    - Side force rear: Cs(r)
+
+
+pressure calc_cp:
+    Operating mode: staticCoeff
+    Not including hydrostatic effects
+
+wallShearStress wallShearStress:
+    processing (47) wall patches:
+        BodyA-Pillar
+        BodyDoorhandles
+        BodyFasciafront1
+        BodyFasciafront2
+        BodyFender
+        BodyHeadlamps
+        BodyHood
+        BodyRear
+        BodyRearAccess
+        BodyRocker
+        BodyRoof
+        BodySide
+        BodyWindowfront
+        BodyWindowfrontframe
+        BodyWindowSide
+        BodyWindowsideframe
+        Mirrors1
+        Mirrors2
+        ClosedGrillLowerInsert
+        ClosedGrillUpperInsert
+        OCDADetailedUnderbody
+        EngineUndershield
+        Tiresfront
+        Tiresrear
+        WheelSupportfront1
+        WheelSupportfront2
+        WheelSupportrear
+        Powertrain
+        ExhaustSystem1
+        ExhaustSystem2
+        ExhaustSystem3
+        NotchbackB-Pillar
+        NotchbackBodyside
+        NotchbackC-Pillar
+        NotchbackRoof
+        NotchbackTrunk
+        NotchbackWindowrear
+        NotchbackWindowrearframe
+        NotchbackWindowside
+        NotchbackWindowsideframe
+        CTRL_SURFACE_Outlet
+        CTRL_SURFACE_Wheelhouse_LHS
+        CTRL_SURFACE_Wheelshouse_RHS
+        Rimsfront
+        Rimsrear
+        BrakeDiscfront
+        BrakeDiscrear
+
+Time = 1
+
+velocityDampingConstraint velocityDamping damped 12 (0%) of cells, with max limit 300
+smoothSolver:  Solving for Ux, Initial residual = 0.006834401751397387, Final residual = 0.000365493359235934, No Iterations 15
+smoothSolver:  Solving for Uy, Initial residual = 0.43873038478492, Final residual = 0.01273000719257228, No Iterations 15
+smoothSolver:  Solving for Uz, Initial residual = 0.2856811392525239, Final residual = 0.008173443550684318, No Iterations 15
+GAMG:  Solving for p, Initial residual = 1, Final residual = 0.1033759564841016, No Iterations 12
+time step continuity errors : sum local = 0.0007534585264666524, global = -5.844252229039779e-05, cumulative = -5.844252229039779e-05
+smoothSolver:  Solving for omega, Initial residual = 0.01763884892318083, Final residual = 1.422388489610243e-06, No Iterations 8
+bounding omega, min: -410.1327110566413 max: 45356108.66896264 average: 2411.859154960684
+smoothSolver:  Solving for k, Initial residual = 0.999999999999267, Final residual = 0.0002296326088308317, No Iterations 8
+ExecutionTime = 30.11 s  ClockTime = 60 s
+
+Time = 2
+
+velocityDampingConstraint velocityDamping damped 0 (0%) of cells, with max limit 300
+smoothSolver:  Solving for Ux, Initial residual = 0.003435428021750234, Final residual = 0.0001584911539465936, No Iterations 15
+smoothSolver:  Solving for Uy, Initial residual = 0.1654356858472814, Final residual = 0.008339367124005541, No Iterations 15
+smoothSolver:  Solving for Uz, Initial residual = 0.08105594160265449, Final residual = 0.003639971498932155, No Iterations 15
+GAMG:  Solving for p, Initial residual = 0.007468546337832139, Final residual = 0.0006752816776142857, No Iterations 12
+time step continuity errors : sum local = 0.0004748178194331121, global = -2.980163075042557e-06, cumulative = -6.142268536544035e-05
+smoothSolver:  Solving for omega, Initial residual = 0.007617952890620772, Final residual = 2.273672547793839e-06, No Iterations 8
+smoothSolver:  Solving for k, Initial residual = 0.1590786029704554, Final residual = 8.674403055972984e-05, No Iterations 8
+ExecutionTime = 44.87 s  ClockTime = 75 s
+
+Wall-clock time elapsed during the current time step = 14.995107582 s
+
+Time = 3
+
+velocityDampingConstraint velocityDamping damped 0 (0%) of cells, with max limit 300
+smoothSolver:  Solving for Ux, Initial residual = 0.001837464753967993, Final residual = 8.805001180008028e-05, No Iterations 15
+smoothSolver:  Solving for Uy, Initial residual = 0.09553453846032553, Final residual = 0.00545008162566038, No Iterations 15
+smoothSolver:  Solving for Uz, Initial residual = 0.03316921068523401, Final residual = 0.001587622450414517, No Iterations 15
+GAMG:  Solving for p, Initial residual = 0.00492878878919948, Final residual = 0.0003158708076903383, No Iterations 12
+time step continuity errors : sum local = 0.0003093449536656223, global = 8.649142612928877e-06, cumulative = -5.277354275251148e-05
+smoothSolver:  Solving for omega, Initial residual = 0.003719654811987542, Final residual = 2.439081638811872e-06, No Iterations 8
+smoothSolver:  Solving for k, Initial residual = 0.05413154151150563, Final residual = 4.994110846283979e-05, No Iterations 8
+ExecutionTime = 59.19 s  ClockTime = 90 s
+
+Wall-clock time elapsed during the current time step = 14.40909069 s
+
+Statistics:
+    Number of measured time steps = 2
+    Average wall-clock time per time step = 14.702099136
+    Standard deviation of wall-clock time per time step = 0.293008446
+    Minimum number of measured time steps for 2% error at 95% confidence level = 4
+
+--> FOAM Warning : 
+    From virtual bool Foam::wallClockTimeStatisticsFunctionObject::end()
+    in file /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/smoke-1node.25702821/system/controlDict/functions/wallClockTimeStatistics at line 220
+    Number of time steps of the current run is smaller than the calculated one by the statistical analysis. Consider to raise endTime in controlDict.
+
+End
+
+Finalising parallel run

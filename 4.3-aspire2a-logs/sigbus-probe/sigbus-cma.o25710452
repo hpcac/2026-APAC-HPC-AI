@@ -1,0 +1,42 @@
+MPICH_SMP_SINGLE_COPY_MODE=CMA
+== x1003c4s5b1n0 (local)
+  ls: cannot access '/dev/xpmem': No such file or directory
+  no xpmem module
+== x1003c4s5b1n0.hostmgmt2003.cm.asp2a.nscc.sg
+  Warning: Permanently added 'x1003c4s5b1n0.hostmgmt2003.cm.asp2a.nscc.sg,10.168.12.204' (ECDSA) to the list of known hosts.
+  ls: cannot access '/dev/xpmem': No such file or directory
+  no xpmem module
+== x1003c5s1b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+  Warning: Permanently added 'x1003c5s1b0n0.hostmgmt2003.cm.asp2a.nscc.sg,10.168.12.83' (ECDSA) to the list of known hosts.
+  ls: cannot access '/dev/xpmem': No such file or directory
+  no xpmem module
+=== 2026-10-07T08:55:36+08:00 stage=reuse label=sigbus-cma-2node decomp=scotch nCores=256 endTime=3 job=25710452.pbs101
+nodes:
+  x1003c4s5b1n0.hostmgmt2003.cm.asp2a.nscc.sg
+  x1003c5s1b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+endTime         3;
+
+simpleFoam
+step=simpleFoam rc=135 wall=95s
+--- simpleFoam: rc=135 after End; tail of logFiles/50_simpleFoam.2026-10-07_08-55-40.log:
+        From virtual bool Foam::wallClockTimeStatisticsFunctionObject::end()
+        in file /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/sigbus-cma-2node.25710452/system/controlDict/functions/wallClockTimeStatistics at line 220
+        Number of time steps of the current run is smaller than the calculated one by the statistical analysis. Consider to raise endTime in controlDict.
+    
+    End
+    
+    Finalising parallel run
+    x1003c5s1b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 241 died from signal 7
+stage=reuse
+label=sigbus-cma-2node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/sigbus-cma-2node.25710452
+decompositionMethod=scotch
+nCores=256
+endTime=3
+module=openfoam/2512
+jobid=25710452.pbs101
+src=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/scotch-split-2node.25702988
+Cd=3.9429246700596987e-01
+nProcs : 256
+    Average wall-clock time per time step = 6.911868405
+=== 2026-10-07T08:57:15+08:00 done

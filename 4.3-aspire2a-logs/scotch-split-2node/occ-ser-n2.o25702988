@@ -1,0 +1,14 @@
+=== 2026-10-06T14:23:38+08:00 stage=serial label=scotch-split-2node decomp=scotch nCores=256 endTime=80 job=25702988.pbs101
+nodes:
+  x1002c6s0b1n0.hostmgmt2002.cm.asp2a.nscc.sg
+nCores          256;
+decompositionMethod scotch;
+endTime         80;
+
+decomposePar
+step=decomposePar rc=0 wall=355s
+
+restore 0 Directory
+Restore 0/ from 0.orig/  [processor dirs]
+serial done: /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/scotch-split-2node.25702988
+=== 2026-10-06T14:29:39+08:00 done

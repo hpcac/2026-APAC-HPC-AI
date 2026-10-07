@@ -1,0 +1,37 @@
+=== 2026-10-07T09:37:53+08:00 stage=all label=nosrx-scotch-2node decomp=scotch nCores=256 endTime=80 job=25710716.pbs101
+nodes:
+  x1002c2s4b1n0.hostmgmt2002.cm.asp2a.nscc.sg
+  x1003c3s5b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+nCores          256;
+decompositionMethod scotch;
+endTime         80;
+
+decomposePar
+step=decomposePar rc=0 wall=310s
+
+restore 0 Directory
+Restore 0/ from 0.orig/  [processor dirs]
+
+renumberMesh
+step=renumberMesh rc=0 wall=42s
+
+potentialFoam
+step=potentialFoam rc=0 wall=28s
+
+applyBoundaryLayer
+step=applyBoundaryLayer rc=0 wall=7s
+
+simpleFoam
+step=simpleFoam rc=0 wall=618s
+stage=all
+label=nosrx-scotch-2node
+run=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/nosrx-scotch-2node.25710716
+decompositionMethod=scotch
+nCores=256
+endTime=80
+module=openfoam/2512
+jobid=25710716.pbs101
+Cd=3.2712980974126155e-01
+nProcs : 256
+    Average wall-clock time per time step = 7.195507150594938
+=== 2026-10-07T09:54:44+08:00 done

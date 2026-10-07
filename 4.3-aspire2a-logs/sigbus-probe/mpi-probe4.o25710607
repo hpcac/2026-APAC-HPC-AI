@@ -1,0 +1,21 @@
+x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg
+x1003c5s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg
+default-16k-1              rc=143 before_finalize=256 after_finalize=0   | x1003c5s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 245 died from signal 7 
+default-16k-2              rc=143 before_finalize=256 after_finalize=0   | x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 20 died from signal 7 
+default-16k-3              rc=143 before_finalize=256 after_finalize=0   | x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 57 died from signal 7 
+eager-1k-1                 rc=143 before_finalize=256 after_finalize=0   | x1003c5s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 140 died from signal 7 
+eager-1k-2                 rc=143 before_finalize=256 after_finalize=0   | x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 48 died from signal 7 
+eager-1k-3                 rc=135 before_finalize=256 after_finalize=0   | x1003c5s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 183 died from signal 7 
+rxmbuf-64k-16k-1           rc=143 before_finalize=256 after_finalize=0   | x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 93 died from signal 7 
+rxmbuf-64k-16k-2           rc=143 before_finalize=256 after_finalize=0   | x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 6 died from signal 7 
+rxmbuf-64k-16k-3           rc=143 before_finalize=256 after_finalize=0   | x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 21 died from signal 7 
+noxrc-16k-1                rc=0   before_finalize=256 after_finalize=256 |  
+noxrc-16k-2                rc=0   before_finalize=256 after_finalize=256 |  
+noxrc-16k-3                rc=0   before_finalize=256 after_finalize=256 |  
+nosrx-16k-1                rc=0   before_finalize=256 after_finalize=256 |  
+nosrx-16k-2                rc=0   before_finalize=256 after_finalize=256 |  
+nosrx-16k-3                rc=0   before_finalize=256 after_finalize=256 |  
+tcp-rxm-16k-1              rc=255 before_finalize=0   after_finalize=0   |  MPICH ERROR [Rank 0] [job id da7b300c-1b33-4573-8618-692038436aa5] [Wed Oct  7 09:17:51 2026] [x1003c4s4b0n0] - Abort(16
+tcp-rxm-16k-2              rc=255 before_finalize=0   after_finalize=0   |  MPICH ERROR [Rank 0] [job id 4ab78938-ff48-4e9b-952c-a413b77a4260] [Wed Oct  7 09:17:53 2026] [x1003c4s4b0n0] - Abort(16
+sockets-16k-1              rc=143 before_finalize=0   after_finalize=0   | x1003c5s1b0n1.hostmgmt2003.cm.asp2a.nscc.sg: rank 139 died from signal 11 
+sockets-16k-2              rc=143 before_finalize=0   after_finalize=0   | x1003c4s4b0n0.hostmgmt2003.cm.asp2a.nscc.sg: rank 107 died from signal 11 

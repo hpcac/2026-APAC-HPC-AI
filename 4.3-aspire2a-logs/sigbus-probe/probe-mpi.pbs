@@ -1,0 +1,51 @@
+#!/bin/bash
+#PBS -P 51401009
+#PBS -q normal
+#PBS -l place=excl
+#PBS -l walltime=00:20:00
+#PBS -j oe
+# SIGBUS 诊断第二轮：
+# 1. 最小 MPI 程序（只 Init/Finalize；再加 Allreduce + Alltoall）在同样的节点数、rank 数上是否也在退出时 signal 7。
+# 2. simpleFoam 复用分解 3 步，加 MPIR_CVAR_NO_COLLECTIVE_FINALIZE=1。
+# 由 qsub -v 给 STAGE=reuse / LABEL / NCORES / ENDTIME / SRC / DECOMP。
+module load openfoam/2512
+W=/scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runs/mpi-probe.${PBS_JOBID%%.*}
+mkdir -p "$W"; cd "$W"
+cat > hello.c <<'EOF'
+#include <mpi.h>
+#include <stdio.h>
+#include <stdlib.h>
+int main(int argc, char **argv) {
+  int r, n;
+  MPI_Init(&argc, &argv);
+  MPI_Comm_rank(MPI_COMM_WORLD, &r);
+  MPI_Comm_size(MPI_COMM_WORLD, &n);
+  if (argc > 1) {
+    double x = r, s;
+    MPI_Allreduce(&x, &s, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+    size_t per = 16384;  /* 16 KiB to each rank, 4 MiB per rank at 256 ranks */
+    char *a = malloc(per * n), *b = malloc(per * n);
+    for (size_t i = 0; i < per * n; i++) a[i] = (char)r;
+    MPI_Alltoall(a, per, MPI_CHAR, b, per, MPI_CHAR, MPI_COMM_WORLD);
+    if (r == 0) printf("sum=%g\n", s);
+    free(a); free(b);
+  }
+  if (r == 0) printf("size=%d before Finalize\n", n);
+  MPI_Finalize();
+  if (r == 0) printf("after Finalize\n");
+  return 0;
+}
+EOF
+cc -O2 -o hello hello.c && echo "built: $(which cc)"
+sort -u "$PBS_NODEFILE"
+for v in plain comm; do
+  arg=; [[ $v == comm ]] && arg=x
+  for i in 1 2 3; do
+    rc=0
+    mpirun -np "$NCORES" ./hello $arg > "hello-$v-$i.log" 2>&1 || rc=$?
+    echo "hello-$v run $i rc=$rc $(grep -c 'died from signal' "hello-$v-$i.log") signal-lines; $(grep -m1 'died from' "hello-$v-$i.log")"
+  done
+done
+echo "--- simpleFoam reuse with MPIR_CVAR_NO_COLLECTIVE_FINALIZE=1"
+export MPIR_CVAR_NO_COLLECTIVE_FINALIZE=1 MPICH_ENV_DISPLAY=1
+exec bash /scratch/users/industry/hpcadvisorycouncil/pengzhi/openfoam-occ-drivaer/runtimes/aspire2a/run-chain.sh
