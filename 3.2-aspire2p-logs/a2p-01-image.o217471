@@ -1,0 +1,21 @@
+[2026-10-08T11:10:37+08:00] job=217471.pbs111 user=pengzhi host=a2ap-dgx035 queue=aiq1
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.9.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+in-container host=a2ap-dgx035 user=pengzhi
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-3e586e42-5740-b5f8-cd75-46ed328d0945)
+/usr/local/lib/python3.12/dist-packages/torchao/quantization/quant_api.py:1731: SyntaxWarning: invalid escape sequence '\.'
+  """Configuration class for applying different quantization configs to modules or parameters based on their fully qualified names (FQNs).
+sglang 0.5.17

@@ -1,0 +1,7 @@
+[2026-10-08T14:48:02+08:00] job=217515.pbs111 user=pengzhi
+head=a2ap-dgx013.asp2p.nscc.sg(10.104.4.87) tail=a2ap-dgx028.asp2p.nscc.sg(10.104.4.102) model=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/models/Qwen3-235B-A22B-Instruct-2507-FP8 N=48
+Warning: Permanently added 'a2ap-dgx013.asp2p.nscc.sg' (ED25519) to the list of known hosts.
+a2ap-dgx013.asp2p.nscc.sg: 8 GPUs in container
+Warning: Permanently added 'a2ap-dgx028.asp2p.nscc.sg' (ED25519) to the list of known hosts.
+a2ap-dgx028.asp2p.nscc.sg: 8 GPUs in container
+FATAL: a worker exited while waiting for http://10.104.4.87:30100/health

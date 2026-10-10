@@ -1,0 +1,166 @@
+[2026-10-08T16:24:39+08:00] job=217647.pbs111 user=pengzhi
+head=a2ap-dgx038.asp2p.nscc.sg(10.104.4.144) tail=a2ap-dgx040.asp2p.nscc.sg(10.104.4.146) model=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/models/Qwen3-0.6B
+Warning: Permanently added 'a2ap-dgx038.asp2p.nscc.sg' (ED25519) to the list of known hosts.
+a2ap-dgx038.asp2p.nscc.sg: 1 GPUs in container
+Warning: Permanently added 'a2ap-dgx040.asp2p.nscc.sg' (ED25519) to the list of known hosts.
+a2ap-dgx040.asp2p.nscc.sg: 1 GPUs in container
+prefill ready
+decode ready
+READY after 105s
+[INFO] Extracting squashfs filesystem...
+Parallel unsquashfs: Using 14 processors
+20914 inodes (25070 blocks) to write
+
+
+created 20270 files
+created 2590 directories
+created 644 symlinks
+created 0 devices
+created 0 fifos
+created 0 sockets
+16:26:27.810 INFO     Starting AIPerf System (_single_run.py:64)
+16:26:27.840 INFO     [OK] Tokenizer /scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/models/Qwen3-0.6B detected (tokenizer_display.py:297)
+16:26:27.840 INFO     1 tokenizer validated | 0.0s (tokenizer_display.py:306)
+16:26:27.848 INFO     Prefetching 1 tokenizer into HF cache... (tokenizer_validator.py:129)
+16:26:30.038 INFO       Cached /scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/models/Qwen3-0.6B (2.17s) (tokenizer_validator.py:146)
+16:26:30.048 INFO     1 tokenizer cached • 2.2s (tokenizer_validator.py:166)
+16:26:30.544 WARNING  Using --osl without ignore_eos or min_tokens in --extra-inputs. Output sequence length cannot be guaranteed unless the server honors these parameters. Consider: --extra-inputs ignore_eos:true (generate until max_tokens) or --extra-inputs min_tokens:<value> (set minimum output length). (cli_utils.py:157)
+16:26:30.731 INFO     Registered Gpu Telemetry Manager (id: 'gpu_telemetry_manager') (system_controller.py:411)
+16:26:30.744 INFO     Server Metrics: Discovered 1 endpoints: ['http://127.0.0.1:8000/metrics'] (manager.py:97)
+16:26:30.779 INFO     Registered Worker Manager (id: 'worker_manager') (system_controller.py:411)
+16:26:30.796 INFO     Registered Server Metrics Manager (id: 'server_metrics_manager') (system_controller.py:411)
+16:26:30.797 INFO     GPU telemetry export enabled: /scratch/users/industry/hpcadvisorycouncil/pengzhi/qwen3-235b-pd/runs/pd-217647/gpu_telemetry_export.jsonl (jsonl_writer.py:56)
+16:26:30.814 INFO     Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable) (otel_metrics_results_processor.py:127)
+16:26:30.815 INFO     Record metrics export enabled: /scratch/users/industry/hpcadvisorycouncil/pengzhi/qwen3-235b-pd/runs/pd-217647/profile_export.jsonl (record_export_jsonl_writer.py:62)
+16:26:30.830 INFO     Registered Dataset Manager (id: 'dataset_manager') (system_controller.py:411)
+16:26:30.876 INFO     Registered Record Processor (id: 'record_processor_4e3a6176') (system_controller.py:411)
+16:26:30.877 INFO     Registered Records Manager (id: 'records_manager') (system_controller.py:411)
+16:26:30.893 INFO     Registered Timing Manager (id: 'timing_manager') (system_controller.py:411)
+16:26:31.047 INFO     Registered Worker (id: 'worker_7f1f504e') (system_controller.py:411)
+16:26:31.168 INFO     AIPerf System is CONFIGURING (system_controller.py:292)
+16:26:31.168 INFO     Configuring all services to start profiling (system_controller.py:305)
+16:26:31.169 INFO     Configuring tokenizers for inference result parser (resolve_alias: True) (inference_result_parser.py:86)
+16:26:31.169 INFO     Waiting for dataset to be configured before configuring timing (manager.py:124)
+16:26:31.170 INFO     Configuring tokenizer(s) for dataset manager (dataset_manager.py:240)
+16:26:31.180 INFO     Server metrics disabled - no Prometheus endpoints reachable (system_controller.py:557)
+16:26:31.180 INFO     Waiting for result domains: profile, telemetry (system_controller.py:824)
+16:26:31.188 WARNING  GPU Telemetry: http://localhost:9400/metrics is not reachable (manager.py:253)
+16:26:31.189 WARNING  GPU Telemetry: http://localhost:9401/metrics is not reachable (manager.py:253)
+16:26:31.190 INFO     DCGM telemetry skipped: no telemetry sources reachable (system_controller.py:531)
+16:26:31.190 INFO     Waiting for result domains: profile (system_controller.py:824)
+16:26:32.548 INFO     Tokenizer(s) configured in 1.38 seconds (dataset_manager.py:244)
+16:26:32.548 INFO     Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': '/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/models/Qwen3-0.6B'}} in 1.38 seconds (inference_result_parser.py:109)
+16:26:32.549 INFO     Configuring dataset for dataset_manager (dataset_manager.py:250)
+16:26:33.070 INFO     Memory-mapped backing store initialized (streaming to /tmp/aiperf_mmap_f62208d15ac2/dataset.dat) (memory_map_utils.py:160)
+16:26:33.070 INFO     Data file finalized: 2 conversations, 0.00 MB (memory_map_utils.py:288)
+16:26:33.071 INFO     Index file created: /tmp/aiperf_mmap_f62208d15ac2/index.dat (memory_map_utils.py:295)
+16:26:33.071 INFO     Backing store finalized: client_type=DatasetClientStoreType.MEMORY_MAP format=MemoryMapFormat.CONVERSATION data_file_path=PosixPath('/tmp/aiperf_mmap_f62208d15ac2/dataset.dat') index_file_path=PosixPath('/tmp/aiperf_mmap_f62208d15ac2/index.dat') conversation_count=2 total_size_bytes=1820 compressed=False compressed_data_file_path=None compressed_index_file_path=None compressed_size_bytes=0 (dataset_manager.py:969)
+16:26:33.071 INFO     sampling strategy: sequential, unique conversations: 2, unique turn count: 2 (dataset_manager.py:987)
+16:26:33.072 INFO     Generating inputs.json file at /scratch/users/industry/hpcadvisorycouncil/pengzhi/qwen3-235b-pd/runs/pd-217647/inputs.json (dataset_manager.py:489)
+16:26:33.076 INFO     inputs.json file generated in 0.00 seconds (dataset_manager.py:508)
+16:26:33.078 INFO     Initialized 1 phase(s): ['Profiling'] (phase_orchestrator.py:228)
+16:26:33.205 INFO     Dataset client initialized and freed 2 conversations from memory (dataset_manager.py:327)
+16:26:33.206 INFO     Dataset configured in 0.66 seconds (dataset_manager.py:263)
+16:26:33.206 INFO     All services configured in 2.04 seconds (system_controller.py:316)
+16:26:33.206 INFO     AIPerf System is CONFIGURED (system_controller.py:294)
+16:26:33.208 INFO     All services started profiling successfully (system_controller.py:338)
+16:26:33.208 INFO     AIPerf System is PROFILING (system_controller.py:296)
+16:26:33.212 INFO     Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None (request_rate.py:114)
+16:26:33.212 NOTICE   Phase profiling (profiling) started | phase_index=0 | profiling_index=0 | target: 2 requests (runner.py:559)
+16:26:33.213 INFO     Credit phase start: profiling (records_manager.py:943)
+16:26:35.702 NOTICE   Phase profiling (profiling) sending complete | sent=2, completed=1, in_flight=1 | sessions: sent=2, completed=1 (runner.py:997)
+16:26:35.703 INFO     Sent 2 requests. Waiting for all to complete... (records_manager.py:959)
+16:26:35.761 NOTICE   Phase profiling (profiling) complete | completed=2, cancelled=0, errors=0 | sessions: completed=2, cancelled=0 | elapsed=2.55s (runner.py:1120)
+16:26:35.761 NOTICE   All credits completed (phase_orchestrator.py:245)
+16:26:35.762 INFO     Received credits complete from 'timing_manager' (system_controller.py:446)
+16:26:35.762 INFO     Received CREDIT_PHASE_COMPLETE message, Phase complete: PhaseRecordsStats(phase=CreditPhase.PROFILING, phase_index=0, profiling_index=0, phase_name='profiling', phase_kind='profiling', start_ns=1791447993212427610, sent_end_ns=1791447995701822670, requests_end_ns=1791447995761224559, baseline_start_ns=1791447993212409680, baseline_end_ns=1791447995761244193, total_expected_requests=2, expected_duration_sec=None, expected_num_sessions=None, expected_grace_period_sec=None, final_requests_sent=None, final_requests_completed=2, final_requests_cancelled=0, final_request_errors=0, final_sent_sessions=None, final_completed_sessions=None, final_cancelled_sessions=None, timeout_triggered=False, grace_period_timeout_triggered=False, was_cancelled=False, records_end_ns=None, success_records=1, error_records=0) (records_manager.py:985)
+16:26:35.762 NOTICE   All requests have completed, please wait for the results to be processed (currently 1 of 2 records processed)... (records_manager.py:996)
+16:26:35.762 INFO     All credits complete, please wait for the results to be processed... (records_manager.py:1022)
+16:26:35.764 INFO     Processed 2 valid requests and 0 errors (2 total). (records_manager.py:858)
+16:26:35.764 INFO     Received all records, processing now... (records_manager.py:864)
+16:26:35.765 INFO     Waiting 2.0s for server metrics flush period... (records_manager.py:918)
+16:26:37.762 INFO     Processing records results... (records_manager.py:1908)
+16:26:37.820 INFO     _finalize_and_process_results completed (records_manager.py:925)
+16:26:37.820 INFO     All results received, initiating shutdown (system_controller.py:819)
+16:26:38.423 INFO     Exporting all records (exporter_manager.py:69)
+16:26:38.481 INFO     Exporting console data (exporter_manager.py:326)
+
+
+                                        NVIDIA AIPerf | LLM Metrics: Effective                                         
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┓
+┃                                    Metric ┃      avg ┃   min ┃      max ┃      p99 ┃      p90 ┃      p50 ┃      std ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━┩
+│          Effective Concurrency (requests) │     1.00 │  0.00 │     1.00 │     1.00 │     1.00 │     1.00 │     0.04 │
+│  Effective Decode Throughput (tokens/sec) │     2.75 │  0.00 │ 1,426.43 │    38.63 │     0.00 │     0.00 │    42.30 │
+│ Effective Prefill Throughput (tokens/sec) │    12.55 │  0.00 │   275.24 │   275.24 │     6.53 │     6.53 │    40.14 │
+│   Effective Decode Concurrency (requests) │     0.01 │  0.00 │     1.00 │     1.00 │     0.00 │     0.00 │     0.12 │
+│  Effective Prefill Concurrency (requests) │     0.98 │  0.00 │     1.00 │     1.00 │     1.00 │     1.00 │     0.12 │
+│   Effective Total Throughput (tokens/sec) │    15.30 │  0.00 │   275.24 │   275.24 │     6.53 │     6.53 │    45.78 │
+│      Effective Decode Throughput Per User │     2.75 │  0.00 │ 1,426.43 │    38.63 │     0.00 │     0.00 │    42.30 │
+│                         (tokens/sec/user) │          │       │          │          │          │          │          │
+│     Effective Prefill Throughput Per User │    12.55 │  0.00 │   275.24 │   275.24 │     6.53 │     6.53 │    40.14 │
+│                         (tokens/sec/user) │          │       │          │          │          │          │          │
+│                 Tokens In Flight (tokens) │    16.00 │  0.00 │    24.00 │    17.00 │    16.00 │    16.00 │     0.74 │
+│         Effective Latency (CO-aware) (ms) │ 1,273.19 │ 59.02 │ 2,487.35 │ 2,463.07 │ 2,244.52 │ 1,273.19 │ 1,214.17 │
+└───────────────────────────────────────────┴──────────┴───────┴──────────┴──────────┴──────────┴──────────┴──────────┘
+                                   NVIDIA AIPerf | LLM Metrics: Active                                    
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┓
+┃                                 Metric ┃    avg ┃  min ┃      max ┃      p99 ┃    p90 ┃   p50 ┃    std ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━┩
+│  Active Decode Throughput (tokens/sec) │ 204.45 │ 0.00 │ 1,426.43 │ 1,153.08 │ 722.82 │ 38.63 │ 303.28 │
+│ Active Prefill Throughput (tokens/sec) │  12.75 │ 6.53 │   275.24 │   275.24 │   6.53 │  6.53 │  40.42 │
+│      Active Decode Throughput Per User │ 204.45 │ 0.00 │ 1,426.43 │ 1,153.08 │ 722.82 │ 38.63 │ 303.28 │
+│                      (tokens/sec/user) │        │      │          │          │        │       │        │
+│     Active Prefill Throughput Per User │  12.75 │ 6.53 │   275.24 │   275.24 │   6.53 │  6.53 │  40.42 │
+│                      (tokens/sec/user) │        │      │          │          │        │       │        │
+│   Active Total Throughput (tokens/sec) │  15.33 │ 6.53 │   275.24 │   275.24 │   6.53 │  6.53 │  45.82 │
+└────────────────────────────────────────┴────────┴──────┴──────────┴──────────┴────────┴───────┴────────┘
+                                                NVIDIA AIPerf | LLM Metrics                                                 
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┓
+┃                                        Metric ┃      avg ┃    min ┃      max ┃      p99 ┃      p90 ┃      p50 ┃      std ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━┩
+│                      Time to First Token (ms) │ 1,255.04 │  58.13 │ 2,451.94 │ 2,428.00 │ 2,212.56 │ 1,255.04 │ 1,196.90 │
+│                     Time to Second Token (ms) │    12.94 │   0.00 │    25.89 │    25.63 │    23.30 │    12.94 │    12.94 │
+│               Time to First Output Token (ms) │ 1,255.04 │  58.13 │ 2,451.94 │ 2,428.00 │ 2,212.56 │ 1,255.04 │ 1,196.90 │
+│                          Request Latency (ms) │ 1,272.15 │  58.13 │ 2,486.16 │ 2,461.88 │ 2,243.36 │ 1,272.15 │ 1,214.01 │
+│                          Decode Duration (ms) │    17.11 │   0.00 │    34.22 │    33.88 │    30.80 │    17.11 │    17.11 │
+│                      Inter Token Latency (ms) │     2.44 │   0.00 │     4.89 │     4.84 │     4.40 │     2.44 │     2.44 │
+│              Output Token Throughput Per User │   204.54 │ 204.54 │   204.54 │   204.54 │   204.54 │   204.54 │     0.00 │
+│                             (tokens/sec/user) │          │        │          │          │          │          │          │
+│ E2E Output Token Throughput (tokens/sec/user) │    70.42 │   3.22 │   137.62 │   136.27 │   124.18 │    70.42 │    67.20 │
+│               Output Sequence Length (tokens) │     8.00 │   8.00 │     8.00 │     8.00 │     8.00 │     8.00 │     0.00 │
+│                Input Sequence Length (tokens) │    16.00 │  16.00 │    16.00 │    16.00 │    16.00 │    16.00 │     0.00 │
+│          Output Token Throughput (tokens/sec) │     6.28 │    N/A │      N/A │      N/A │      N/A │      N/A │      N/A │
+│           Input Token Throughput (tokens/sec) │    12.55 │    N/A │      N/A │      N/A │      N/A │      N/A │      N/A │
+│             Request Throughput (requests/sec) │     0.78 │    N/A │      N/A │      N/A │      N/A │      N/A │      N/A │
+│                      Request Count (requests) │     2.00 │    N/A │      N/A │      N/A │      N/A │      N/A │      N/A │
+└───────────────────────────────────────────────┴──────────┴────────┴──────────┴──────────┴──────────┴──────────┴──────────┘
+
+
+╭──────────────────────────────────────────── GPU Telemetry Platform ─────────────────────────────────────────────╮
+│  Platform: unknown                                                                                              │
+│  Metric semantics are platform-specific; cross-platform comparisons require workload and collector validation.  │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+No GPU telemetry data collected during the benchmarking run.
+
+CLI Command: aiperf profile --model 'qwen' --tokenizer 
+'/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/models/Qwen3-0.6B'
+--url 'http://127.0.0.1:8000' --endpoint-type 'chat' --streaming --request-count 2 --concurrency 1 
+--num-dataset-entries 2 --synthetic-input-tokens-mean 16 --output-tokens-mean 8 --artifact-dir 
+'/scratch/users/industry/hpcadvisorycouncil/pengzhi/qwen3-235b-pd/runs/pd-217647'
+Benchmark Duration: 2.55 sec
+CSV Export: 
+/scratch/users/industry/hpcadvisorycouncil/pengzhi/qwen3-235b-pd/runs/pd-217647/profile_export_aiper
+f.csv
+JSON Export: 
+/scratch/users/industry/hpcadvisorycouncil/pengzhi/qwen3-235b-pd/runs/pd-217647/profile_export_aiper
+f.json
+Log File: 
+/scratch/users/industry/hpcadvisorycouncil/pengzhi/qwen3-235b-pd/runs/pd-217647/logs/aiperf.log
+
+/scratch/users/industry/hpcadvisorycouncil/pengzhi/qwen3-235b-pd/runs/pd-217647/inputs.json
+/scratch/users/industry/hpcadvisorycouncil/pengzhi/qwen3-235b-pd/runs/pd-217647/profile_export_aiperf.json
+[2026-10-08 16:25:40] server_args=ServerArgs(model_path='/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/models/Qwen3-0.6B', tokenizer_path='/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/models/Qwen3-0.6B', tokenizer_mode='auto', tokenizer_backend='huggingface', tokenizer_worker_num=1, detokenizer_worker_num=1, skip_tokenizer_init=False, load_format='auto', model_loader_extra_config='{}', trust_remote_code=True, context_length=4096, is_embedding=False, enable_multimodal=None, revision=None, model_impl='auto', model_config_parser='auto', json_model_override_args='{}', dtype='auto', quantization=None, quantization_param_path=None, kv_cache_dtype='auto', enable_fp32_lm_head=False, modelopt_quant=None, modelopt_checkpoint_restore_path=None, modelopt_checkpoint_save_path=None, modelopt_export_path=None, quantize_and_serve=False, rl_quant_profile=None, enable_tf32_matmul=False, mem_fraction_static=0.4, max_running_requests=256, max_queued_requests=None, max_total_tokens=None, chunked_prefill_size=8192, enable_dynamic_chunking=False, max_prefill_tokens=16384, prefill_max_requests=None, schedule_policy='fcfs', enable_priority_scheduling=False, disable_priority_preemption=False, default_priority_value=None, abort_on_priority_when_disabled=False, schedule_low_priority_values_first=False, priority_scheduling_preemption_threshold=10, retraction_policy='length', schedule_conservativeness=1.0, page_size=1, swa_full_tokens_ratio=0.8, disable_hybrid_swa_memory=False, radix_eviction_policy='lru', prefill_only_disable_kv_cache=False, disable_radix_cache=True, enable_page_major_kv_layout=False, enable_unified_memory=False, disable_chunked_prefix_cache=False, disable_overlap_schedule=False, num_continuous_decode_steps=1, scheduler_recv_interval=1, enable_mixed_chunk=False, nccl_port=None, dist_timeout=None, dist_init_addr=None, nnodes=1, node_rank=0, tp_size=1, dcp_size=1, pp_size=1, pp_max_micro_batch_size=None, pp_async_batch_depth=0, dp_size=1, load_balance_method='round_robin', attn_cp_size=1, moe_dp_size=1, dwdp_size=1, dcp_comm_backend='ag_rs', dcp_replicate_q_proj=None, enable_prefill_cp=False, cp_strategy=None, enable_dsa_cache_layer_split=False, enable_dsa_prefill_context_parallel=False, dsa_prefill_cp_mode='round-robin-split', enable_prefill_context_parallel=False, prefill_cp_mode='in-seq-split', enable_cp_decode_attn_tp=False, enable_dp_attention=False, enable_dp_attention_local_control_broadcast=False, enable_dp_lm_head=False, enable_attn_tp_input_scattered=False, disable_attn_tp_gather=False, enable_p2p_check=False, device='cuda', base_gpu_id=0, gpu_id_step=1, random_seed=117587869, watchdog_timeout=300, soft_watchdog_timeout=None, sleep_on_idle=False, use_ray=False, custom_sigquit_handler=None, numa_node=None, gc_threshold=None, host='0.0.0.0', port=30200, fastapi_root_path='', smg_grpc_mode=False, grpc_mode=False, grpc_port=None, sidecar=None, sidecar_args=None, skip_server_warmup=False, warmups=None, enable_http2=False, ssl_keyfile=None, ssl_certfile=None, ssl_ca_certs=None, ssl_keyfile_password=None, enable_ssl_refresh=False, api_key=None, admin_api_key=None, served_model_name='qwen', weight_version='default', chat_template=None, hf_chat_template_name=None, completion_template=None, file_storage_path='sglang_storage', enable_cache_report=False, reasoning_parser=None, default_chat_template_kwargs=None, strip_thinking_cache=False, enable_strict_thinking=False, tool_call_parser=None, tool_server=None, sampling_defaults='model', asr_max_buffer_seconds=60, asr_max_concurrent_sessions=32, preferred_sampling_params=None, allow_auto_truncate=False, stream_interval=1, batch_notify_size=16, stream_response_default_include_usage=False, incremental_streaming_output=False, enable_streaming_session=False, enable_session_radix_cache=False, log_level='info', log_level_http=None, log_requests=False, log_requests_level=2, log_requests_format='text', log_requests_target=None, uvicorn_access_log_exclude_prefixes=[], crash_dump_folder=None, show_time_cost=False, enable_metrics=False, smg_http_sidecar_port=None, enable_mfu_metrics=False, enable_metrics_for_all_schedulers=False, load_snapshot_publish_interval=15, tokenizer_metrics_custom_labels_header='x-custom-labels', tokenizer_metrics_allowed_custom_labels=None, extra_metric_labels=None, bucket_time_to_first_token=None, bucket_inter_token_latency=None, bucket_e2e_request_latency=None, prompt_tokens_buckets=None, generation_tokens_buckets=None, gc_warning_threshold_secs=0.0, decode_log_interval=40, enable_request_time_stats_logging=False, kv_events_config=None, enable_forward_pass_metrics=False, forward_pass_metrics_worker_id='', forward_pass_metrics_ipc_name=None, enable_trace=False, trace_modules='request', otlp_traces_endpoint='localhost:4317', export_metrics_to_file=False, export_metrics_to_file_dir=None, stat_loggers=None, constrained_json_whitespace_pattern=None, constrained_json_disable_any_whitespace=False, attention_backend='fa3', decode_attention_backend=None, prefill_attention_backend=None, sampling_backend='flashinfer', grammar_backend='xgrammar', radix_cache_backend=None, mm_attention_backend=None, fp8_gemm_runner_backend='auto', fp4_gemm_runner_backend='auto', bf16_gemm_backend='auto', dsa_prefill_backend=None, dsa_decode_backend=None, dsa_paged_mqa_logits_backend='auto', dsa_topk_backend='sgl-kernel', disable_flashinfer_autotune=False, flashinfer_autotune_skip_ops=None, mamba_backend='triton', cuda_graph_config=CudaGraphConfig(decode=PhaseConfig(backend='full', max_bs=256, bs=[1, 2, 4, 8, 12, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256], tc_compiler='eager', full_prefill_max_req=None, full_prefill_prefix_chunk_tokens=None), prefill=PhaseConfig(backend='disabled', max_bs=8192, bs=[4, 8, 12, 16, 20, 24, 28, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 288, 320, 352, 384, 416, 448, 480, 512, 576, 640, 704, 768, 832, 896, 960, 1024, 1280, 1536, 1792, 2048, 2304, 2560, 2816, 3072, 3328, 3584, 3840, 4096, 4608, 5120, 5632, 6144, 6656, 7168, 7680, 8192], tc_compiler='eager', full_prefill_max_req=None, full_prefill_prefix_chunk_tokens=None)), cuda_graph_backend_decode=None, cuda_graph_backend_prefill=None, cuda_graph_max_bs_decode=None, cuda_graph_max_bs_prefill=None, cuda_graph_bs_decode=None, cuda_graph_bs_prefill=None, cuda_graph_tc_compiler=None, disable_prefill_cuda_graph=False, disable_decode_cuda_graph=False, disable_cuda_graph=False, disable_cuda_graph_padding=False, enable_profile_cuda_graph=False, enable_cudagraph_gc=False, debug_cuda_graph=False, enable_layerwise_nvtx_marker=False, enable_nccl_nvls=False, enable_symm_mem=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, triton_attention_split_tile_size=None, flashinfer_mla_disable_ragged=False, enable_fused_qk_norm_rope=False, enable_precise_embedding_interpolation=False, enable_fused_moe_sum_all_reduce=False, enable_deepseek_v4_fp4_indexer=False, disable_custom_all_reduce=False, enable_mscclpp=False, enable_torch_symm_mem=False, enable_scattered_sconv=False, pre_warm_nccl=False, enable_quant_communications=False, enable_flashinfer_allreduce_fusion=False, enforce_disable_flashinfer_allreduce_fusion=False, flashinfer_allreduce_fusion_backend=None, enable_aiter_allreduce_fusion=False, enable_torch_compile=False, enable_torch_compile_debug_mode=False, torch_compile_max_bs=32, torchao_config='', speculative_algorithm=None, speculative_draft_model_path=None, speculative_draft_model_revision=None, speculative_draft_load_format=None, speculative_num_steps=None, speculative_eagle_topk=None, speculative_num_draft_tokens=None, speculative_dflash_block_size=None, speculative_dspark_block_size=None, speculative_dspark_sps_table_path=None, speculative_dspark_confidence_sts_path=None, speculative_dspark_align_verify_tokens_to_graph_tier=False, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_use_rejection_sampling=False, speculative_token_map=None, speculative_attention_mode='prefill', speculative_draft_attention_backend=None, speculative_draft_window_size=None, speculative_moe_runner_backend='auto', speculative_moe_a2a_backend=None, speculative_draft_model_quantization=None, speculative_skip_dp_mlp_sync=False, enable_multi_layer_eagle=False, speculative_adaptive=False, speculative_adaptive_config=None, decoupled_spec_bind_endpoint=None, decoupled_spec_connect_endpoints=None, decoupled_spec_rank=None, decoupled_spec_role='null', spec_trace_dir=None, speculative_ngram_min_bfs_breadth=1, speculative_ngram_max_bfs_breadth=10, speculative_ngram_match_type='BFS', speculative_ngram_max_trie_depth=18, speculative_ngram_capacity=10000000, speculative_ngram_external_corpus_path=None, speculative_ngram_external_sam_budget=0, speculative_ngram_external_corpus_max_tokens=10000000, ep_size=1, moe_a2a_backend='none', moe_runner_backend='auto', flashinfer_mxfp4_moe_precision='default', deepep_mode='auto', fuseep_mode=2, deepep_dispatcher_output_dtype='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm=None, init_expert_location='trivial', enable_eplb=False, eplb_algorithm='auto', eplb_rebalance_num_iterations=1000, eplb_rebalance_layers_per_chunk=None, eplb_min_rebalancing_utilization_threshold=1.0, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=1000, enable_expert_distribution_metrics=False, deepep_config=None, moe_dense_tp_size=None, elastic_ep_backend=None, enable_elastic_expert_backup=False, mooncake_ib_device=None, enable_waterfill=False, ep_join_mode=None, ep_join_rank_offset=0, elastic_ep_initial_size=None, max_ep_size=None, elastic_ep_scale_timeout=600, elastic_ep_rejoin=False, disable_flashinfer_cutlass_moe_fp4_allgather=False, disable_shared_experts_fusion=False, enforce_shared_experts_fusion=False, max_mamba_cache_size=None, mamba_ssm_dtype=None, mamba_max_states_per_path=-1, enable_mamba_cache_stochastic_rounding=False, mamba_cache_philox_rounds=0, mamba_full_memory_ratio=0.9, mamba_radix_cache_strategy='auto', uses_mamba_radix_cache=False, mamba_track_interval=256, enable_int8_mamba_checkpoint=False, int8_mamba_ckpt_size=None, linear_attn_backend='triton', linear_attn_decode_backend=None, linear_attn_prefill_backend=None, linear_attn_verify_backend=None, enable_linear_replayssm=False, linear_replayssm_cache_len=16, enable_linear_replayssm_spec=False, enable_hierarchical_cache=False, hicache_ratio=2.0, hicache_size=0, hicache_write_policy='write_through', hicache_io_backend='kernel', hicache_mem_layout='page_first', hicache_storage_backend=None, hicache_storage_prefetch_policy='timeout', hicache_storage_backend_extra_config=None, enable_hisparse=False, hisparse_config=None, enable_broadcast_mm_inputs_process=False, enable_prefix_mm_cache=False, mm_enable_dp_encoder=False, mm_process_config={}, mm_processor_worker_num=0, mm_io_worker_num=0, limit_mm_data_per_request=None, enable_mm_global_cache=False, disable_fast_image_processor=False, mm_feature_transport='cpu', keep_mm_feature_on_device=False, enable_lora=None, enable_lora_overlap_loading=None, max_lora_rank=None, lora_target_modules=None, lora_paths=None, max_loaded_loras=None, max_loras_per_batch=8, lora_eviction_policy='lru', lora_backend='csgmv', max_lora_chunk_size=16, experts_shared_outer_loras=None, lora_use_virtual_experts=False, lora_strict_loading=False, lora_drain_wait_threshold=0.0, enable_two_batch_overlap=False, enable_single_batch_overlap=False, tbo_token_distribution_threshold=0.48, cpu_offload_gb=0, offload_group_size=-1, offload_num_in_group=1, offload_prefetch_step=1, offload_mode='cpu', enable_lmcache=False, lmcache_config_file=None, enable_flexkv=False, flexkv_config_file=None, kt_weight_path=None, kt_method='AMXINT4', kt_cpuinfer=None, kt_threadpool_count=2, kt_num_gpu_experts=None, kt_max_deferred_experts_per_token=None, dllm_algorithm=None, dllm_algorithm_config=None, dllm_fdfo=True, disaggregation_mode='decode', disaggregation_transfer_backend='nixl', disaggregation_bootstrap_port=8998, disaggregation_ib_device=None, disaggregation_decode_enable_radix_cache=False, disaggregation_decode_enable_offload_kvcache=False, num_reserved_decode_tokens=512, disaggregation_decode_extra_slots=0, disaggregation_decode_polling_interval=1, optimistic_prefill_attempts=0, encoder_only=False, language_only=False, encoder_transfer_backend='zmq_to_scheduler', encoder_urls=[], encoder_bootstrap_port=8997, encoder_register_urls=[], enable_adaptive_dispatch_to_encoder=False, enable_pdmux=False, pdmux_config_path=None, sm_group_num=8, custom_weight_loader=[], weight_loader_disable_mmap=False, weight_loader_prefetch_checkpoints=False, weight_loader_prefetch_num_threads=4, weight_loader_drop_cache_after_load=False, remote_instance_weight_loader_seed_instance_ip=None, remote_instance_weight_loader_seed_instance_service_port=None, remote_instance_weight_loader_send_weights_group_ports=None, remote_instance_weight_loader_backend='nccl', remote_instance_weight_loader_start_seed_via_transfer_engine=False, engine_info_bootstrap_port=6789, modelexpress_config=None, download_dir=None, model_checksum=None, delete_ckpt_after_loading=False, decrypted_config_file=None, decrypted_draft_config_file=None, checkpoint_engine_wait_weights_before_ready=False, enable_prefill_delayer=False, prefill_delayer_max_delay_passes=30, prefill_delayer_token_usage_low_watermark=None, prefill_delayer_forward_passes_buckets=None, prefill_delayer_wait_seconds_buckets=None, prefill_delayer_queue_min_ratio=None, prefill_delayer_max_delay_ms=None, min_free_slots_delay=None, enable_deterministic_inference=False, rl_on_policy_target=None, kv_canary='none', kv_canary_real_data='none', kv_canary_sweep_interval=0, enable_dynamic_batch_tokenizer=False, dynamic_batch_tokenizer_batch_size=32, dynamic_batch_tokenizer_batch_timeout=0.002, enable_tokenizer_batch_encode=False, disable_tokenizer_batch_decode=False, debug_tensor_dump_output_folder=None, debug_tensor_dump_layers=None, debug_tensor_dump_input_file=None, enable_memory_saver=False, enable_weights_cpu_backup=False, enable_draft_weights_cpu_backup=False, enable_custom_logit_processor=False, enable_return_hidden_states=False, return_hidden_states_mode=None, enable_return_routed_experts=False, enable_return_indexer_topk=False, disable_outlines_disk_cache=False, enable_mis=False, weight_cache_mode='off', weight_cache_socket=None, weight_cache_timeout=1800, forward_hooks=None, msprobe_dump_config=None)
+AIPERF ok

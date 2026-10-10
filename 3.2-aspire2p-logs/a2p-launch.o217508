@@ -1,0 +1,131 @@
+[2026-10-08T15:03:41+08:00] job=217508.pbs111 head=a2ap-dgx035.asp2p.nscc.sg tail=a2ap-dgx036.asp2p.nscc.sg
+a2ap-dgx035.asp2p.nscc.sg
+a2ap-dgx036.asp2p.nscc.sg
+10.104.4.141    STREAM a2ap-dgx035.asp2p.nscc.sg
+10.104.4.142    STREAM a2ap-dgx036.asp2p.nscc.sg
+CUDA_VISIBLE_DEVICES=GPU-3e586e42-5740-b5f8-cd75-46ed328d0945
+PBS_JOBID=217508.pbs111
+/opt/pbs/bin/pbsdsh
+/usr/mpi/gcc/openmpi-4.1.7a1/bin/mpirun
+/bin/mpirun
+=== head: enroot start
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.9.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-3e586e42-5740-b5f8-cd75-46ed328d0945)
+=== tail via ssh: env + host GPUs + enroot start
+Warning: Permanently added 'a2ap-dgx036.asp2p.nscc.sg' (ED25519) to the list of known hosts.
+a2ap-dgx036
+PBS_JOBID=217508.pbs111
+1
+sglang
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.9.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-79ef4e69-f7dd-3b18-88e8-71461a206874)
+ssh rc=0
+=== pbsdsh
+pbsdsh a2ap-dgx035 CVD=GPU-3e586e42-5740-b5f8-cd75-46ed328d0945 NVD=unset
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.9.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-3e586e42-5740-b5f8-cd75-46ed328d0945)
+pbsdsh a2ap-dgx036 CVD=GPU-79ef4e69-f7dd-3b18-88e8-71461a206874 NVD=unset
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.9.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-79ef4e69-f7dd-3b18-88e8-71461a206874)
+/opt/pbs/bin/pbsdsh: spawned task 0x00000000 on logical node 0 event 2
+/opt/pbs/bin/pbsdsh: spawned task 0x00000001 on logical node 1 event 3
+pbsdsh: waiting on 2 spawned and 0 obits
+pbsdsh: waiting on 1 spawned and 1 obits
+/opt/pbs/bin/pbsdsh: task 0x00000000 exit status 0
+pbsdsh: waiting on 1 spawned and 0 obits
+pbsdsh: waiting on 0 spawned and 1 obits
+/opt/pbs/bin/pbsdsh: task 0x00000001 exit status 0
+pbsdsh rc=0
+=== /usr/mpi/gcc/openmpi-4.1.7a1/bin/mpirun
+[1,0]<stdout>:rank=0 a2ap-dgx035 CVD=GPU-3e586e42-5740-b5f8-cd75-46ed328d0945 NVD=unset
+[1,1]<stdout>:rank=1 a2ap-dgx036 CVD=unset NVD=unset
+[1,1]<stdout>:
+[1,1]<stdout>:==========
+[1,1]<stdout>:== CUDA ==
+[1,1]<stdout>:==========
+[1,1]<stdout>:
+[1,1]<stdout>:CUDA Version 12.9.1
+[1,1]<stdout>:
+[1,1]<stdout>:Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+[1,1]<stdout>:
+[1,1]<stdout>:This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+[1,1]<stdout>:By pulling and using the container, you accept the terms and conditions of this license:
+[1,1]<stdout>:https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+[1,1]<stdout>:
+[1,1]<stdout>:A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+[1,1]<stdout>:
+[1,1]<stdout>:GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-79ef4e69-f7dd-3b18-88e8-71461a206874)
+[1,0]<stdout>:
+[1,0]<stdout>:==[1,0]<stdout>:==[1,0]<stdout>:===[1,0]<stdout>:==[1,0]<stdout>:=
+[1,0]<stdout>:== CUDA ==
+[1,0]<stdout>:==========
+[1,0]<stdout>:
+[1,0]<stdout>:CUDA Version 12.9.1
+[1,0]<stdout>:
+[1,0]<stdout>:Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+[1,0]<stdout>:
+[1,0]<stdout>:This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+[1,0]<stdout>:By pulling and using the container, you accept the terms and conditions of this license:
+[1,0]<stdout>:https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+[1,0]<stdout>:
+[1,0]<stdout>:A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+[1,0]<stdout>:
+[1,0]<stdout>:GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-3e586e42-5740-b5f8-cd75-46ed328d0945)
+mpirun rc=0
+end 2026-10-08T15:04:50+08:00

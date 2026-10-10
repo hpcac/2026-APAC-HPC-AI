@@ -1,0 +1,120 @@
+start 2026-10-08T10:12:50+08:00 job=217433.pbs111 host=a2ap-dgx036 queue=aiq1
+0, NVIDIA H100 80GB HBM3, 81559 MiB, 595.71.05
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
+mlx5_0 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+mlx5_1 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+mlx5_10 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+mlx5_11 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+mlx5_2 Ethernet 4: ACTIVE 100 Gb/sec (4X EDR)
+mlx5_3 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+mlx5_4 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+mlx5_5 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+mlx5_6 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+mlx5_7 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+mlx5_8 Ethernet 4: ACTIVE 100 Gb/sec (4X EDR)
+mlx5_9 InfiniBand 4: ACTIVE 400 Gb/sec (4X NDR)
+3.5.0
+/dev/md1                                                                                                                                                                           28T  140G   27T   1% /raid
+100.127.255.111@o2ib,100.127.255.112@o2ib:100.127.255.113@o2ib,100.127.255.114@o2ib:100.127.255.115@o2ib,100.127.255.116@o2ib:100.127.255.117@o2ib,100.127.255.118@o2ib:/scratch  2.4P  307T  2.1P  13% /scratch
+prefetch lmsysorg/sglang:v0.5.17-cu129 amd64 sha256:bbe1ec8694ab6b0e6ea0a567c2d492ed7c9bed13cb33ffe356ade0aaa8343c9f layers 69
+[2026-10-08T10:12:53+08:00] layer 045d26588a26e2a1a2a87bfd7c1dbf05b1bdbad6476908ecf14402538f92c29b 5674227399 B in 16 parts
+curl: (28) Operation timed out after 599205 milliseconds with 343282098 out of 354639213 bytes received
+curl: (28) Operation timed out after 599235 milliseconds with 352358634 out of 354639213 bytes received
+[2026-10-08T10:24:49+08:00] layer 045d26588a26e2a1a2a87bfd7c1dbf05b1bdbad6476908ecf14402538f92c29b done
+
+real	11m59.376s
+user	2m14.836s
+sys	1m27.112s
+[2026-10-08T10:24:49+08:00] import docker://lmsysorg/sglang:v0.5.17-cu129 try 1
+[INFO] Querying registry for permission grant
+[INFO] Authenticating with user: <anonymous>
+[INFO] Authentication succeeded
+[INFO] Fetching image manifest list
+[INFO] Fetching image manifest
+[INFO] Found all layers in cache
+[INFO] Extracting image layers...
+[INFO] Converting whiteouts...
+[INFO] Creating squashfs filesystem...
+Parallel mksquashfs: Using 14 processors
+Creating 4.0 filesystem on /scratch/users/industry/hpcadvisorycouncil/pengzhi/enroot-images/sglang-v0.5.17-cu129.sqsh.part, block size 131072.
+
+Exportable Squashfs 4.0 filesystem, gzip compressed, data block size 131072
+	uncompressed data, uncompressed metadata, uncompressed fragments,
+	uncompressed xattrs, uncompressed ids
+	duplicates are not removed
+Filesystem size 37291764.61 Kbytes (36417.74 Mbytes)
+	99.88% of uncompressed filesystem size (37336820.01 Kbytes)
+Inode table size 9914014 bytes (9681.65 Kbytes)
+	100.00% of uncompressed inode table size (9914014 bytes)
+Directory table size 10708182 bytes (10457.21 Kbytes)
+	100.00% of uncompressed directory table size (10708182 bytes)
+No duplicate files removed
+Number of inodes 259656
+Number of files 223359
+Number of fragments 26332
+Number of symbolic links 8889
+Number of device nodes 0
+Number of fifo nodes 0
+Number of socket nodes 0
+Number of directories 27408
+Number of ids (unique uids + gids) 1
+Number of uids 1
+	root (0)
+Number of gids 1
+	root (0)
+
+real	1m12.318s
+user	0m51.982s
+sys	2m15.198s
+total 38141536
+drwxr-xr-x  2 pengzhi pengzhi        4096 Oct  8 10:26 .
+drwx-----x 10 pengzhi pengzhi        4096 Oct  8 08:46 ..
+-rw-r--r--  1 pengzhi pengzhi   869969920 Oct  8 09:40 aiperf-0.12.0.sqsh
+-rw-r--r--  1 pengzhi pengzhi 38186770432 Oct  8 10:25 sglang-v0.5.17-cu129.sqsh
+[INFO] Extracting squashfs filesystem...
+Parallel unsquashfs: Using 14 processors
+232319 inodes (478423 blocks) to write
+
+
+created 223359 files
+created 27408 directories
+created 8889 symlinks
+created 0 devices
+created 0 fifos
+created 0 sockets
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.9.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-a5feb070-a2c2-ac6c-0973-1eb11d564751)
+/usr/local/lib/python3.12/dist-packages/torchao/quantization/quant_api.py:1731: SyntaxWarning: invalid escape sequence '\.'
+  """Configuration class for applying different quantization configs to modules or parameters based on their fully qualified names (FQNs).
+torch 2.11.0+cu129 cuda 12.9 available True NVIDIA H100 80GB HBM3
+sum 1024.0
+sglang 0.5.17
+nixl ok
+[INFO] Extracting squashfs filesystem...
+Parallel unsquashfs: Using 14 processors
+20914 inodes (25070 blocks) to write
+
+
+created 20270 files
+created 2590 directories
+created 644 symlinks
+created 0 devices
+created 0 fifos
+created 0 sockets
+│ --version             Display application version.                           │
+╰──────────────────────────────────────────────────────────────────────────────╯
+IMAGE OK 2026-10-08T10:40:06+08:00

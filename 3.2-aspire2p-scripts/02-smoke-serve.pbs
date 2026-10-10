@@ -1,0 +1,42 @@
+#!/bin/bash
+#PBS -N a2p-02-serve
+#PBS -q normal
+#PBS -P <project-id>
+#PBS -l select=1:ncpus=14:ngpus=1:mem=235gb:container_engine=enroot
+#PBS -l container_image=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/images/sglang-v0.5.17-cu129.sqsh
+#PBS -l container_name=sglang
+#PBS -l walltime=00:10:00
+#PBS -j oe
+#
+# ASPIRE 2A+ port of Firmus reference-scripts/02-smoke-serve.sbatch.
+# Serve Qwen3-0.6B just long enough to answer /health, then exit.
+# Pass = /health 200 before READY_SECS. Exit code is the verdict.
+set -euo pipefail
+
+PUB=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3
+MODEL=${PUB}/models/Qwen3-0.6B
+PORT=30000
+READY_SECS=300
+
+echo "[$(date -Iseconds)] job=${PBS_JOBID} user=$(whoami) host=$(hostname) queue=${PBS_QUEUE}"
+echo "model=${MODEL} port=${PORT}"
+test -f "${MODEL}/config.json"
+test -f "${MODEL}/model.safetensors"
+
+# Single node, so `enroot start --env` is fine here. Across nodes it only
+# reaches the first node; use `#PBS -l enroot_env_file=` instead.
+enroot start --env MODEL="${MODEL}" --env PORT="${PORT}" --env READY_SECS="${READY_SECS}" \
+  sglang bash -c 'set -euo pipefail
+  echo "in-container host=$(hostname) user=$(whoami)"
+  python3 -m sglang.launch_server \
+    --model-path "${MODEL}" \
+    --host 127.0.0.1 --port "${PORT}" \
+    --tp-size 1 --mem-fraction-static 0.4 \
+    --context-length 4096 --trust-remote-code >&2 &
+  timeout "${READY_SECS}" curl -sf \
+    --retry-connrefused --retry-all-errors \
+    --retry-delay 2 --retry 150 --max-time 2 \
+    -o /dev/null "http://127.0.0.1:${PORT}/health"
+  echo "READY after ${SECONDS}s"
+  kill %1
+'

@@ -1,0 +1,138 @@
+#!/bin/bash
+#PBS -N a2p-09-235b
+#PBS -q normal
+#PBS -P <project-id>
+#PBS -l select=2:ncpus=112:ngpus=8:mpiprocs=1:mem=1880gb:container_engine=enroot
+#PBS -l place=scatter:excl
+#PBS -l container_image=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/images/sglang-v0.5.17-cu129.sqsh
+#PBS -l container_name=sglang
+#PBS -l walltime=00:35:00
+#PBS -j oe
+#
+# ASPIRE 2A+ port of Firmus reference-scripts/09-pd-235b-fatp-peak-bench.sbatch.
+# 235B 8+8: 2x Prefill TP=4 on node 0 + 2x Decode TP=4, EP=4 on node 1, router
+# on node 0. Worker flags are 09's. (Firmus 07's TP=2 prefill does not fit on
+# H100: 236 GB of FP8 weights > 2 x 80 GB.) Then the official AIPerf command
+# (official-aiperf.sh, unmodified) at concurrency N through the router.
+# Pass = aiperf exits 0.
+#   qsub -v N=48 aspire2p-09-pd-235b-fatp.pbs
+set -euo pipefail
+
+PUB=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3
+AIPERF=${PUB}/images/aiperf-0.12.0.sqsh
+MODEL=${PUB}/models/Qwen3-235B-A22B-Instruct-2507-FP8
+OFFICIAL=${PBS_O_WORKDIR}/official-aiperf.sh
+N=${N:-48}
+R_PORT=8000
+READY_SECS=900
+IB=mlx5_0:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_9:1,mlx5_10:1,mlx5_11:1
+ART=${PBS_O_WORKDIR}/pd235b-${PBS_JOBID%%.*}
+
+NODES=($(sort -u "${PBS_NODEFILE}"))
+HEAD=${NODES[0]}
+TAIL=${NODES[1]}
+ip_of() { getent ahostsv4 "$1" | awk '{print $1; exit}'; }
+HEAD_IP=$(ip_of "${HEAD}")
+TAIL_IP=$(ip_of "${TAIL}")
+
+PIDS=()
+wait_http() {
+  local t0=${SECONDS} p
+  until curl -sf -o /dev/null --max-time 2 "$1"; do
+    for p in "${PIDS[@]}"; do
+      kill -0 "${p}" 2>/dev/null || { echo "FATAL: a worker exited while waiting for $1"; return 1; }
+    done
+    [ $((SECONDS - t0)) -lt "${READY_SECS}" ] || { echo "FATAL: $1 not ready in ${READY_SECS}s"; return 1; }
+    sleep 2
+  done
+}
+
+echo "[$(date -Iseconds)] job=${PBS_JOBID} user=$(whoami)"
+echo "head=${HEAD}(${HEAD_IP}) tail=${TAIL}(${TAIL_IP}) model=${MODEL} N=${N}"
+test -r "${AIPERF}" && test -f "${MODEL}/config.json" && test -r "${OFFICIAL}"
+mkdir -p "${ART}"
+cp "${OFFICIAL}" "${ART}/"
+
+# Runs on the host of the node it is started on: name port tp gpus [flags...]
+# TMPDIR: PyTorch symmetric memory binds a socket under $TMPDIR, and the job's
+# host TMPDIR does not exist inside the container (custom all-reduce then
+# falls back with "Failed to bind socket").
+cat >"${ART}/worker.sh" <<EOF
+set -euo pipefail
+name=\$1 port=\$2 tp=\$3 gpus=\$4
+shift 4
+role=\${name%%-*}
+echo "\${name} host=\$(hostname) gpus=\${gpus} tp=\${tp} ib=${IB}"
+exec enroot start \\
+  --env CUDA_VISIBLE_DEVICES=\${gpus} \\
+  --env UCX_NET_DEVICES=${IB} \\
+  --env UCX_POSIX_USE_PROC_LINK=n \\
+  --env TRITON_CACHE_DIR=/tmp/sglang-\${name}/triton \\
+  --env TORCHINDUCTOR_CACHE_DIR=/tmp/sglang-\${name}/inductor \\
+  --env TMPDIR=/tmp \\
+  sglang python3 -m sglang.launch_server \\
+    --model-path ${MODEL} --served-model-name qwen --trust-remote-code \\
+    --context-length 8192 --tp-size \${tp} --mem-fraction-static 0.90 \\
+    --disaggregation-mode \${role} --disaggregation-transfer-backend nixl \\
+    "\$@" --host 0.0.0.0 --port \${port}
+EOF
+
+on_node() {
+  local host=$1; shift
+  ssh -o StrictHostKeyChecking=no -o BatchMode=yes "${host}" "export PBS_JOBID=${PBS_JOBID}; $*"
+}
+# The router does not exit promptly on SIGTERM, so never block on it.
+# [.] keeps the pattern from matching the remote shell running pkill.
+cleanup() {
+  set +e
+  kill "${PIDS[@]}" 2>/dev/null
+  local pat='sglang[.]launch_server|sglang_router[.]launch_router'
+  for h in "${HEAD}" "${TAIL}"; do
+    on_node "${h}" "pkill -u \$(id -u) -f '${pat}'; sleep 5; pkill -9 -u \$(id -u) -f '${pat}'"
+  done
+}
+trap cleanup EXIT
+
+for h in "${HEAD}" "${TAIL}"; do
+  n=$(on_node "${h}" "enroot start sglang nvidia-smi -L" | grep -c '^GPU ' || true)
+  echo "${h}: ${n} GPUs in container"
+  [ "${n}" = 8 ] || { echo "FATAL: expected 8 GPUs on ${h}"; exit 1; }
+done
+
+# Four workers loading 236 GB each straight from Lustre took 4.5-11 min.
+# Read the weights once per node with parallel sequential streams so the
+# workers load from the page cache.
+for h in "${HEAD}" "${TAIL}"; do
+  on_node "${h}" "s=\$(date +%s); find ${MODEL} -name '*.safetensors' | xargs -P 24 -I{} dd if={} of=/dev/null bs=16M status=none; echo \"\$(hostname) prewarm \$((\$(date +%s)-s))s\"" &
+done
+wait
+echo "prewarm done ${SECONDS}s"
+
+W="bash ${ART}/worker.sh"
+on_node "${HEAD}" "${W} prefill-0 30100 4 0,1,2,3 --disaggregation-bootstrap-port 9000" >"${ART}/prefill-0.log" 2>&1 & PIDS+=($!)
+on_node "${HEAD}" "${W} prefill-1 30101 4 4,5,6,7 --disaggregation-bootstrap-port 9001" >"${ART}/prefill-1.log" 2>&1 & PIDS+=($!)
+on_node "${TAIL}" "${W} decode-0 30200 4 0,1,2,3 --ep-size 4 --max-running-requests 256" >"${ART}/decode-0.log" 2>&1 & PIDS+=($!)
+on_node "${TAIL}" "${W} decode-1 30201 4 4,5,6,7 --ep-size 4 --max-running-requests 256" >"${ART}/decode-1.log" 2>&1 & PIDS+=($!)
+
+wait_http "http://${HEAD_IP}:30100/health"; echo "prefill-0 ready ${SECONDS}s"
+wait_http "http://${HEAD_IP}:30101/health"; echo "prefill-1 ready ${SECONDS}s"
+wait_http "http://${TAIL_IP}:30200/health"; echo "decode-0 ready ${SECONDS}s"
+wait_http "http://${TAIL_IP}:30201/health"; echo "decode-1 ready ${SECONDS}s"
+
+enroot start sglang python3 -m sglang_router.launch_router --pd-disaggregation \
+  --prefill "http://${HEAD_IP}:30100" 9000 \
+  --prefill "http://${HEAD_IP}:30101" 9001 \
+  --decode "http://${TAIL_IP}:30200" \
+  --decode "http://${TAIL_IP}:30201" \
+  --host 0.0.0.0 --port "${R_PORT}" \
+  >"${ART}/router.log" 2>&1 & PIDS+=($!)
+
+wait_http "http://${HEAD_IP}:${R_PORT}/health"
+echo "READY after ${SECONDS}s"
+
+# Official command, unmodified. The AIPerf image's entrypoint is `bash -c "$@"`,
+# so the whole command is one string; cd so artifacts land in ${ART}.
+enroot create --name aiperf "${AIPERF}"
+enroot start aiperf "cd ${ART} && N=${N} HOST=127.0.0.1:${R_PORT} MODEL=qwen bash ${ART}/official-aiperf.sh"
+find "${ART}" -name profile_export_aiperf.json | grep .
+echo "AIPERF ok ${SECONDS}s"

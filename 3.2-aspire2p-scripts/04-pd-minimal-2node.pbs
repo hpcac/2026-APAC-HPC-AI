@@ -1,0 +1,124 @@
+#!/bin/bash
+#PBS -N a2p-04-pd-min
+#PBS -q normal
+#PBS -P <project-id>
+#PBS -l select=2:ncpus=14:ngpus=1:mpiprocs=1:mem=235gb:container_engine=enroot
+#PBS -l place=scatter
+#PBS -l container_image=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/images/sglang-v0.5.17-cu129.sqsh
+#PBS -l container_name=sglang
+#PBS -l walltime=00:15:00
+#PBS -j oe
+#
+# ASPIRE 2A+ port of Firmus reference-scripts/04-pd-minimal-2node.sbatch.
+# 1 prefill (node 0) + 1 decode (node 1) + router, then 2 aiperf requests
+# through the router. One GPU per node; place=scatter puts the two chunks on
+# different nodes so the KV cache crosses InfiniBand. Pass = aiperf exits 0.
+#
+# PBS creates the "sglang" container on both nodes. Each worker is started on
+# its node over ssh (allowed inside a job), and runs its own `enroot start`
+# there, so `--env` applies on that node.
+set -euo pipefail
+
+PUB=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3
+AIPERF=${PUB}/images/aiperf-0.12.0.sqsh
+MODEL=${PUB}/models/Qwen3-0.6B
+P_PORT=30100
+D_PORT=30200
+BOOT=9000
+R_PORT=8000
+READY_SECS=300
+IB=mlx5_0:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_9:1,mlx5_10:1,mlx5_11:1
+ART=${PBS_O_WORKDIR}/pd-${PBS_JOBID%%.*}
+
+NODES=($(sort -u "${PBS_NODEFILE}"))
+HEAD=${NODES[0]}
+TAIL=${NODES[1]}
+ip_of() { getent ahostsv4 "$1" | awk '{print $1; exit}'; }
+HEAD_IP=$(ip_of "${HEAD}")
+TAIL_IP=$(ip_of "${TAIL}")
+
+PIDS=()
+wait_http() {
+  local t0=${SECONDS} p
+  until curl -sf -o /dev/null --max-time 2 "$1"; do
+    for p in "${PIDS[@]}"; do
+      kill -0 "${p}" 2>/dev/null || { echo "FATAL: a worker exited while waiting for $1"; return 1; }
+    done
+    [ $((SECONDS - t0)) -lt "${READY_SECS}" ] || { echo "FATAL: $1 not ready in ${READY_SECS}s"; return 1; }
+    sleep 2
+  done
+}
+
+echo "[$(date -Iseconds)] job=${PBS_JOBID} user=$(whoami)"
+echo "head=${HEAD}(${HEAD_IP}) tail=${TAIL}(${TAIL_IP}) model=${MODEL}"
+test -r "${AIPERF}" && test -f "${MODEL}/config.json"
+mkdir -p "${ART}"
+
+# Runs on the host of the node it is started on.
+cat >"${ART}/worker.sh" <<EOF
+set -euo pipefail
+role=\$1 port=\$2
+shift 2
+echo "\${role} host=\$(hostname) ib=${IB}"
+exec enroot start --env UCX_NET_DEVICES=${IB} sglang \\
+  python3 -m sglang.launch_server \\
+    --model-path ${MODEL} --served-model-name qwen --trust-remote-code \\
+    --context-length 4096 --tp-size 1 --mem-fraction-static 0.4 \\
+    --disaggregation-mode \${role} --disaggregation-transfer-backend nixl \\
+    "\$@" --host 0.0.0.0 --port \${port}
+EOF
+
+on_node() {
+  local host=$1; shift
+  ssh -o StrictHostKeyChecking=no -o BatchMode=yes "${host}" "export PBS_JOBID=${PBS_JOBID}; $*"
+}
+# The router does not exit promptly on SIGTERM, so never block on it.
+# [.] keeps the pattern from matching the remote shell running pkill.
+cleanup() {
+  set +e
+  kill "${PIDS[@]}" 2>/dev/null
+  local pat
+  for pat in "${HEAD} sglang[.]launch_server.*--port ${P_PORT}" \
+             "${HEAD} sglang_router[.]launch_router.*--port ${R_PORT}" \
+             "${TAIL} sglang[.]launch_server.*--port ${D_PORT}"; do
+    on_node "${pat%% *}" "pkill -u \$(id -u) -f '${pat#* }'; sleep 3; pkill -9 -u \$(id -u) -f '${pat#* }'"
+  done
+}
+trap cleanup EXIT
+
+for h in "${HEAD}" "${TAIL}"; do
+  n=$(on_node "${h}" "enroot start sglang nvidia-smi -L" | grep -c '^GPU ' || true)
+  echo "${h}: ${n} GPUs in container"
+  [ "${n}" = 1 ] || { echo "FATAL: expected 1 GPU on ${h}"; exit 1; }
+done
+
+on_node "${HEAD}" bash "${ART}/worker.sh" prefill "${P_PORT}" --disaggregation-bootstrap-port "${BOOT}" \
+  >"${ART}/prefill.log" 2>&1 & PIDS+=($!)
+on_node "${TAIL}" bash "${ART}/worker.sh" decode "${D_PORT}" --max-running-requests 256 \
+  >"${ART}/decode.log" 2>&1 & PIDS+=($!)
+
+wait_http "http://${HEAD_IP}:${P_PORT}/health"
+echo "prefill ready"
+wait_http "http://${TAIL_IP}:${D_PORT}/health"
+echo "decode ready"
+
+enroot start sglang python3 -m sglang_router.launch_router --pd-disaggregation \
+  --prefill "http://${HEAD_IP}:${P_PORT}" "${BOOT}" \
+  --decode "http://${TAIL_IP}:${D_PORT}" \
+  --host 0.0.0.0 --port "${R_PORT}" \
+  >"${ART}/router.log" 2>&1 & PIDS+=($!)
+
+wait_http "http://${HEAD_IP}:${R_PORT}/health"
+echo "READY after ${SECONDS}s"
+
+# The AIPerf image's entrypoint is `bash -c "$@"`: pass the command as one string.
+enroot create --name aiperf "${AIPERF}"
+enroot start aiperf "aiperf profile \
+  --model qwen --tokenizer ${MODEL} \
+  --url http://127.0.0.1:${R_PORT} --endpoint-type chat --streaming \
+  --request-count 2 --concurrency 1 --num-dataset-entries 2 \
+  --synthetic-input-tokens-mean 16 --output-tokens-mean 8 \
+  --artifact-dir ${ART}"
+ls "${ART}"/*.json
+grep -m1 -iE "bootstrap|transfer|nixl" "${ART}/decode.log" || true
+echo "AIPERF ok"

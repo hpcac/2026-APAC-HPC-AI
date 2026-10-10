@@ -1,0 +1,10 @@
+start 2026-10-08T09:34:00+08:00 job=217418.pbs111 host=a2ap-dgx036 repo=Qwen/Qwen3-235B-A22B-Instruct-2507-FP8
+revision e156cb4efae43fbee1a1ab073f946a1377e6b969 files 34
+to fetch 34
+
+real	9m57.779s
+user	1m58.557s
+sys	8m12.493s
+bytes 236449100685
+221G	/home/users/industry/hpcadvisorycouncil/pengzhi/scratch/public/2026-apac-hpc-ai/qwen3/models/Qwen3-235B-A22B-Instruct-2507-FP8
+WEIGHTS OK 2026-10-08T09:43:59+08:00

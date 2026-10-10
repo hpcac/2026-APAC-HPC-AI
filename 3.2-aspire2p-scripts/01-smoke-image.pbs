@@ -1,0 +1,23 @@
+#!/bin/bash
+#PBS -N a2p-01-image
+#PBS -q normal
+#PBS -P <project-id>
+#PBS -l select=1:ncpus=14:ngpus=1:mem=235gb:container_engine=enroot
+#PBS -l container_image=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/images/sglang-v0.5.17-cu129.sqsh
+#PBS -l container_name=sglang
+#PBS -l walltime=00:10:00
+#PBS -j oe
+#
+# ASPIRE 2A+ port of Firmus reference-scripts/01-smoke-image.sbatch.
+# PBS creates the "sglang" container from container_image on the node before
+# this script starts; /scratch and $HOME are mounted inside by default.
+# Pass = container starts, GPU visible, sglang imports. Exit code is the verdict.
+set -euo pipefail
+
+echo "[$(date -Iseconds)] job=${PBS_JOBID} user=$(whoami) host=$(hostname) queue=${PBS_QUEUE}"
+
+enroot start sglang bash -c 'set -euo pipefail
+  echo "in-container host=$(hostname) user=$(whoami)"
+  nvidia-smi -L
+  python3 -c "import sglang; print(\"sglang\", getattr(sglang, \"__version__\", \"imported\"))"
+'

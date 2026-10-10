@@ -1,0 +1,54 @@
+#!/bin/bash
+#PBS -N a2p-03-aiperf
+#PBS -q normal
+#PBS -P <project-id>
+#PBS -l select=1:ncpus=14:ngpus=1:mem=235gb:container_engine=enroot
+#PBS -l container_image=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3/images/sglang-v0.5.17-cu129.sqsh
+#PBS -l container_name=sglang
+#PBS -l walltime=00:15:00
+#PBS -j oe
+#
+# ASPIRE 2A+ port of Firmus reference-scripts/03-smoke-serve-aiperf.sbatch.
+# One node: sglang serve, then 2 aiperf requests. Pass = aiperf exits 0.
+# PBS takes one container_image per job, so the AIPerf container is created by
+# hand from its .sqsh (enroot data lives under /raid, per job).
+set -euo pipefail
+
+PUB=/scratch/users/industry/hpcadvisorycouncil/pengzhi/public/2026-apac-hpc-ai/qwen3
+AIPERF=${PUB}/images/aiperf-0.12.0.sqsh
+MODEL=${PUB}/models/Qwen3-0.6B
+PORT=30000
+READY_SECS=300
+ART=${PBS_O_WORKDIR}/aiperf-${PBS_JOBID%%.*}
+
+echo "[$(date -Iseconds)] job=${PBS_JOBID} user=$(whoami) host=$(hostname) queue=${PBS_QUEUE}"
+echo "aiperf=${AIPERF} model=${MODEL} port=${PORT}"
+test -r "${AIPERF}"
+test -f "${MODEL}/config.json"
+mkdir -p "${ART}"
+
+enroot start sglang python3 -m sglang.launch_server \
+  --model-path "${MODEL}" --served-model-name qwen \
+  --host 0.0.0.0 --port "${PORT}" \
+  --tp-size 1 --mem-fraction-static 0.4 \
+  --context-length 4096 --trust-remote-code >&2 &
+SERVER=$!
+trap 'kill ${SERVER} 2>/dev/null || true' EXIT
+
+timeout "${READY_SECS}" curl -sf \
+  --retry-connrefused --retry-all-errors \
+  --retry-delay 2 --retry 150 --max-time 2 \
+  -o /dev/null "http://127.0.0.1:${PORT}/health"
+echo "READY after ${SECONDS}s"
+
+# The AIPerf image's entrypoint is `bash -c "$@"`: only the first argument is
+# run as the command, so the whole command line must be one string.
+enroot create --name aiperf "${AIPERF}"
+enroot start aiperf "aiperf profile \
+  --model qwen --tokenizer ${MODEL} \
+  --url http://127.0.0.1:${PORT} --endpoint-type chat --streaming \
+  --request-count 2 --concurrency 1 --num-dataset-entries 2 \
+  --synthetic-input-tokens-mean 16 --output-tokens-mean 8 \
+  --artifact-dir ${ART}"
+ls "${ART}"/*.json
+echo "AIPERF ok"
