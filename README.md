@@ -67,7 +67,7 @@ Judges may also give extra Bonus points for Basic tuning they find especially so
 This addendum replaces "60%" and "40%" in the Presentation Guidelines and Scoring of both task files. Each task is now **70%** judges (Basic 20 + Bonus 15) and **30%** performance and re-verification (15), out of 50 points per task.
 
 - The performance part ranks the Basic submission on its task's metric (Qwen: good output token/s; OpenFOAM: 4-node Average wall-clock time per time step). Platforms are not compared with each other.
-- Qwen: a re-run that does not clear `good_request_fraction ≥ 0.90`, or scores below the reference deployment (`reference-scripts/07`, in the Application Notes), is scored at the reference deployment's score.
+- Qwen: a re-run that does not clear `good_request_fraction ≥ 0.90`, or scores below the reference deployment (`3.1-firmus-scripts/07`, in the Application Notes), is scored at the reference deployment's score.
 - One interview covers both tasks, as before.
 
 ### R5. Work already done

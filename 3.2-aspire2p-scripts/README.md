@@ -1,6 +1,6 @@
 # ASPIRE 2A+ reference scripts
 
-PBS job scripts for the steps in [3.2 Qwen3 Application Notes - ASPIRE 2A+.md](../3.2%20Qwen3%20Application%20Notes%20-%20ASPIRE%202A+.md). Like Firmus's `reference-scripts/`, they are worked examples, not requirements.
+PBS job scripts for the steps in [3.2 Qwen3 Application Notes - ASPIRE 2A+.md](../3.2%20Qwen3%20Application%20Notes%20-%20ASPIRE%202A+.md). Like `3.1-firmus-scripts/`, they are worked examples, not requirements.
 
 | Script | Demonstrates | Firmus counterpart |
 |---|---|---|
