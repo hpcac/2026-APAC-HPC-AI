@@ -1,0 +1,254 @@
+2026-10-20 18:27:09.147 - system_controller - INFO - Registered Worker Manager (id: 'worker_manager')
+2026-10-20 18:27:09.171 - server_metrics_manager - INFO - Server Metrics: Discovered 1 endpoints: ['http://127.0.0.1:8000/metrics']
+2026-10-20 18:27:09.184 - GPUTelemetryJSONLWriter_0d2cc63d - INFO - GPU telemetry export enabled: /home/apacsc51/qwen3-235b-pd/firmus07/runs/25013/artifacts/qwen-openai-chat-concurrency48/gpu_telemetry_export.jsonl
+2026-10-20 18:27:09.190 - OTelMetricsResultsProcessor_f2e52b36 - INFO - Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-10-20 18:27:09.191 - RecordExportJSONLWriter_e53a899b - INFO - Record metrics export enabled: /home/apacsc51/qwen3-235b-pd/firmus07/runs/25013/artifacts/qwen-openai-chat-concurrency48/profile_export.jsonl
+2026-10-20 18:27:09.297 - system_controller - INFO - Registered Gpu Telemetry Manager (id: 'gpu_telemetry_manager')
+2026-10-20 18:27:09.298 - system_controller - INFO - Registered Server Metrics Manager (id: 'server_metrics_manager')
+2026-10-20 18:27:09.299 - system_controller - INFO - Registered Dataset Manager (id: 'dataset_manager')
+2026-10-20 18:27:09.299 - system_controller - INFO - Registered Record Processor (id: 'record_processor_a6c179dd')
+2026-10-20 18:27:09.300 - system_controller - INFO - Registered Records Manager (id: 'records_manager')
+2026-10-20 18:27:09.302 - system_controller - INFO - Registered Record Processor (id: 'record_processor_c1689a7c')
+2026-10-20 18:27:09.303 - system_controller - INFO - Registered Record Processor (id: 'record_processor_607cfe0d')
+2026-10-20 18:27:09.311 - system_controller - INFO - Registered Record Processor (id: 'record_processor_bc1548c9')
+2026-10-20 18:27:09.312 - system_controller - INFO - Registered Record Processor (id: 'record_processor_caf520fb')
+2026-10-20 18:27:09.315 - system_controller - INFO - Registered Record Processor (id: 'record_processor_f3b6ba39')
+2026-10-20 18:27:09.379 - system_controller - INFO - Registered Record Processor (id: 'record_processor_47591902')
+2026-10-20 18:27:09.380 - system_controller - INFO - Registered Record Processor (id: 'record_processor_7e81b976')
+2026-10-20 18:27:09.382 - system_controller - INFO - Registered Record Processor (id: 'record_processor_9812be2b')
+2026-10-20 18:27:09.386 - system_controller - INFO - Registered Record Processor (id: 'record_processor_80c748a0')
+2026-10-20 18:27:09.389 - system_controller - INFO - Registered Record Processor (id: 'record_processor_29e575c7')
+2026-10-20 18:27:09.394 - system_controller - INFO - Registered Record Processor (id: 'record_processor_1ef06d1f')
+2026-10-20 18:27:09.399 - system_controller - INFO - Registered Worker (id: 'worker_ea38226f')
+2026-10-20 18:27:09.401 - system_controller - INFO - Registered Worker (id: 'worker_6b2e9fb0')
+2026-10-20 18:27:09.401 - system_controller - INFO - Registered Worker (id: 'worker_37d1fc9c')
+2026-10-20 18:27:09.402 - system_controller - INFO - Registered Worker (id: 'worker_b9492631')
+2026-10-20 18:27:09.408 - system_controller - INFO - Registered Worker (id: 'worker_97db6d22')
+2026-10-20 18:27:09.408 - system_controller - INFO - Registered Worker (id: 'worker_a8b738f9')
+2026-10-20 18:27:09.410 - system_controller - INFO - Registered Worker (id: 'worker_f476907a')
+2026-10-20 18:27:09.411 - system_controller - INFO - Registered Worker (id: 'worker_1d212358')
+2026-10-20 18:27:09.412 - system_controller - INFO - Registered Worker (id: 'worker_3033d8b7')
+2026-10-20 18:27:09.414 - system_controller - INFO - Registered Worker (id: 'worker_3425341b')
+2026-10-20 18:27:09.418 - system_controller - INFO - Registered Worker (id: 'worker_29c599a1')
+2026-10-20 18:27:09.420 - system_controller - INFO - Registered Worker (id: 'worker_2a6d98a5')
+2026-10-20 18:27:09.422 - system_controller - INFO - Registered Worker (id: 'worker_c39ff234')
+2026-10-20 18:27:09.422 - system_controller - INFO - Registered Worker (id: 'worker_e2aa69fd')
+2026-10-20 18:27:09.432 - system_controller - INFO - Registered Timing Manager (id: 'timing_manager')
+2026-10-20 18:27:09.439 - system_controller - INFO - Registered Worker (id: 'worker_9e072b01')
+2026-10-20 18:27:09.441 - system_controller - INFO - Registered Worker (id: 'worker_165a06e2')
+2026-10-20 18:27:09.441 - system_controller - INFO - Registered Worker (id: 'worker_5b4d269e')
+2026-10-20 18:27:09.441 - system_controller - INFO - Registered Worker (id: 'worker_cefdfc0a')
+2026-10-20 18:27:09.442 - system_controller - INFO - Registered Worker (id: 'worker_bf84ecb8')
+2026-10-20 18:27:09.442 - system_controller - INFO - Registered Worker (id: 'worker_6d8dbcce')
+2026-10-20 18:27:09.442 - system_controller - INFO - Registered Worker (id: 'worker_f28babdd')
+2026-10-20 18:27:09.443 - system_controller - INFO - Registered Worker (id: 'worker_19a90a1a')
+2026-10-20 18:27:09.451 - system_controller - INFO - Registered Worker (id: 'worker_4e9e612f')
+2026-10-20 18:27:09.451 - system_controller - INFO - Registered Worker (id: 'worker_6e546cbe')
+2026-10-20 18:27:09.453 - system_controller - INFO - Registered Worker (id: 'worker_2086e026')
+2026-10-20 18:27:09.453 - system_controller - INFO - Registered Worker (id: 'worker_7562ed8f')
+2026-10-20 18:27:09.454 - system_controller - INFO - Registered Worker (id: 'worker_c85bec10')
+2026-10-20 18:27:09.455 - system_controller - INFO - Registered Worker (id: 'worker_0f718a78')
+2026-10-20 18:27:09.461 - system_controller - INFO - Registered Worker (id: 'worker_35da4ad1')
+2026-10-20 18:27:09.463 - system_controller - INFO - Registered Worker (id: 'worker_cfe5f235')
+2026-10-20 18:27:09.464 - system_controller - INFO - Registered Worker (id: 'worker_14d2a4fd')
+2026-10-20 18:27:09.465 - system_controller - INFO - Registered Worker (id: 'worker_ac1d66ad')
+2026-10-20 18:27:09.470 - system_controller - INFO - Registered Worker (id: 'worker_bb071b0d')
+2026-10-20 18:27:09.473 - system_controller - INFO - Registered Worker (id: 'worker_a1aeecf6')
+2026-10-20 18:27:09.474 - system_controller - INFO - Registered Worker (id: 'worker_8934c65d')
+2026-10-20 18:27:09.475 - system_controller - INFO - Registered Worker (id: 'worker_3e3f691c')
+2026-10-20 18:27:09.477 - system_controller - INFO - Registered Worker (id: 'worker_7f4e475f')
+2026-10-20 18:27:09.486 - system_controller - INFO - Registered Worker (id: 'worker_8eea8aa7')
+2026-10-20 18:27:09.496 - system_controller - INFO - Registered Worker (id: 'worker_f3848def')
+2026-10-20 18:27:09.503 - system_controller - INFO - Registered Worker (id: 'worker_5730e859')
+2026-10-20 18:27:09.503 - system_controller - INFO - Registered Worker (id: 'worker_44becdd4')
+2026-10-20 18:27:09.503 - system_controller - INFO - Registered Worker (id: 'worker_a65c357b')
+2026-10-20 18:27:09.504 - system_controller - INFO - Registered Worker (id: 'worker_4807e292')
+2026-10-20 18:27:09.505 - system_controller - INFO - Registered Worker (id: 'worker_74f33f9a')
+2026-10-20 18:27:09.510 - system_controller - INFO - Registered Worker (id: 'worker_70a7be74')
+2026-10-20 18:27:09.518 - system_controller - INFO - Registered Worker (id: 'worker_0b919b09')
+2026-10-20 18:27:09.519 - system_controller - INFO - Registered Worker (id: 'worker_0bfbee04')
+2026-10-20 18:27:09.525 - system_controller - INFO - Registered Worker (id: 'worker_5be2074b')
+2026-10-20 18:27:09.642 - system_controller - INFO - AIPerf System is CONFIGURING
+2026-10-20 18:27:09.643 - system_controller - INFO - Configuring all services to start profiling
+2026-10-20 18:27:09.643 - timing_manager - INFO - Waiting for dataset to be configured before configuring timing
+2026-10-20 18:27:09.644 - InferenceResultParser_e0fa8c6c - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_82f8f1fc - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.643 - InferenceResultParser_7d0e94a0 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_3ccb08df - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_6025a538 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_a5225daf - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_257eb609 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_e3f01b18 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_140ae797 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_ef257541 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_4e8316f8 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - InferenceResultParser_91fac18d - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-10-20 18:27:09.644 - dataset_manager - INFO - Configuring tokenizer(s) for dataset manager
+2026-10-20 18:27:09.648 - system_controller - INFO - Server metrics disabled - no Prometheus endpoints reachable
+2026-10-20 18:27:09.648 - system_controller - INFO - Waiting for result domains: profile, telemetry
+2026-10-20 18:27:09.690 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9400/metrics is not reachable
+2026-10-20 18:27:09.691 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9401/metrics is not reachable
+2026-10-20 18:27:09.692 - system_controller - INFO - DCGM telemetry skipped: no telemetry sources reachable
+2026-10-20 18:27:09.692 - system_controller - INFO - Waiting for result domains: profile
+2026-10-20 18:27:10.831 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.835 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.836 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.837 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.837 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:10.837 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.837 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:10.839 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.839 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.839 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:10.840 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:10.842 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.843 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:10.843 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.843 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.844 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.844 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.845 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.846 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.846 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.847 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.847 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.847 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:10.847 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:10.851 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.851 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.852 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.852 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.854 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.856 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.862 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:10.998 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:10.999 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:11.004 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.075 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.079 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.079 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.080 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.082 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.087 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.087 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.088 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.090 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.090 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.090 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.091 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.092 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.092 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:11.092 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:11.092 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.094 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.096 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.098 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.098 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.098 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.098 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.102 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.102 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-20 18:27:11.106 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.109 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.112 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.249 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-20 18:27:11.254 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-235B-A22B-Instruct-2507/ac9c66cc9b46af7306746a9250f23d47083d689e/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.319 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.323 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.334 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.336 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.340 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.342 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.343 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.350 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.353 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.359 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.400 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.404 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.512 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-20 18:27:11.555 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.564 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.571 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.571 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.576 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.578 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.578 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.590 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.599 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.603 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.640 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.646 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:11.768 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.263 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.271 - InferenceResultParser_e3f01b18 - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.63 seconds
+2026-10-20 18:27:12.304 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.306 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.314 - InferenceResultParser_6025a538 - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.67 seconds
+2026-10-20 18:27:12.315 - InferenceResultParser_ef257541 - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.67 seconds
+2026-10-20 18:27:12.326 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.332 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.333 - InferenceResultParser_e0fa8c6c - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.69 seconds
+2026-10-20 18:27:12.336 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.340 - InferenceResultParser_82f8f1fc - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.70 seconds
+2026-10-20 18:27:12.342 - InferenceResultParser_91fac18d - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.70 seconds
+2026-10-20 18:27:12.356 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.364 - InferenceResultParser_a5225daf - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.72 seconds
+2026-10-20 18:27:12.387 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.389 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.395 - InferenceResultParser_140ae797 - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.75 seconds
+2026-10-20 18:27:12.396 - InferenceResultParser_3ccb08df - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.75 seconds
+2026-10-20 18:27:12.406 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.411 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.413 - InferenceResultParser_257eb609 - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.77 seconds
+2026-10-20 18:27:12.417 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.420 - InferenceResultParser_4e8316f8 - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.77 seconds
+2026-10-20 18:27:12.425 - dataset_manager - INFO - Tokenizer(s) configured in 2.78 seconds
+2026-10-20 18:27:12.425 - dataset_manager - INFO - Configuring dataset for dataset_manager
+2026-10-20 18:27:12.455 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-10-20 18:27:12.461 - InferenceResultParser_7d0e94a0 - INFO - Initialized tokenizers: {'qwen': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3-235B-A22B-Instruct-2507'}} in 2.82 seconds
+2026-10-20 18:27:23.758 - MemoryMapDatasetBackingStore_2e22e234 - INFO - Memory-mapped backing store initialized (streaming to /tmp/aiperf_mmap_3f56ccd1cad9/dataset.dat)
+2026-10-20 18:27:24.674 - MemoryMapDatasetBackingStore_2e22e234 - INFO - Data file finalized: 12800 conversations, 221.79 MB
+2026-10-20 18:27:24.675 - MemoryMapDatasetBackingStore_2e22e234 - INFO - Index file created: /tmp/aiperf_mmap_3f56ccd1cad9/index.dat
+2026-10-20 18:27:24.676 - dataset_manager - INFO - Backing store finalized: client_type=DatasetClientStoreType.MEMORY_MAP format=MemoryMapFormat.CONVERSATION data_file_path=PosixPath('/tmp/aiperf_mmap_3f56ccd1cad9/dataset.dat') index_file_path=PosixPath('/tmp/aiperf_mmap_3f56ccd1cad9/index.dat') conversation_count=12800 total_size_bytes=232564647 compressed=False compressed_data_file_path=None compressed_index_file_path=None compressed_size_bytes=0
+2026-10-20 18:27:24.919 - dataset_manager - INFO - sampling strategy: sequential, unique conversations: 12800, unique turn count: 12800
+2026-10-20 18:27:24.951 - dataset_manager - INFO - Generating inputs.json file at /home/apacsc51/qwen3-235b-pd/firmus07/runs/25013/artifacts/qwen-openai-chat-concurrency48/inputs.json
+2026-10-20 18:27:25.052 - PhaseOrchestrator_529a7bd8 - INFO - Initialized 2 phase(s): ['Warmup', 'Profiling']
+2026-10-20 18:27:25.562 - dataset_manager - INFO - inputs.json file generated in 0.61 seconds
+2026-10-20 18:27:25.785 - dataset_manager - INFO - Dataset client initialized and freed 12800 conversations from memory
+2026-10-20 18:27:25.786 - dataset_manager - INFO - Dataset configured in 13.36 seconds
+2026-10-20 18:27:25.786 - system_controller - INFO - All services configured in 16.14 seconds
+2026-10-20 18:27:25.787 - system_controller - INFO - AIPerf System is CONFIGURED
+2026-10-20 18:27:25.789 - system_controller - INFO - All services started profiling successfully
+2026-10-20 18:27:25.790 - system_controller - INFO - AIPerf System is PROFILING
+2026-10-20 18:27:25.792 - RateTiming - INFO - Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None
+2026-10-20 18:27:25.793 - PhaseRunner - NOTICE - Phase warmup (warmup) started | phase_index=0 | target: 60.0s duration
+2026-10-20 18:27:25.793 - PhaseRunner - INFO - Waiting for event 'warmup phase sending' with timeout of 59.999512418s
+2026-10-20 18:27:25.794 - records_manager - INFO - Credit phase start: warmup
+2026-10-20 18:27:55.794 - PhaseRunner - INFO - Phase warmup progress | returned=12 | sent=60 | in_flight=48 | errors=0 | elapsed=30.0s
+2026-10-20 18:28:25.793 - PhaseRunner - INFO - Timeout of 59.999512418s elapsed for event 'warmup phase sending'
+2026-10-20 18:28:25.794 - PhaseRunner - NOTICE - Phase warmup (warmup) sending complete | sent=129, completed=81, in_flight=48 | sessions: sent=129, completed=81 | timeout_triggered=True
+2026-10-20 18:28:25.795 - PhaseRunner - INFO - Waiting for event 'warmup phase credits returned' with timeout of infs
+2026-10-20 18:28:25.795 - PhaseRunner - INFO - Phase warmup progress | returned=81/129 | sent=129 | in_flight=48 | errors=0 | elapsed=60.0s
+2026-10-20 18:28:29.717 - PhaseRunner - NOTICE - Phase warmup (warmup) complete | completed=129, cancelled=0, errors=0 | sessions: completed=129, cancelled=0 | elapsed=63.92s
+2026-10-20 18:28:29.725 - RateTiming - INFO - Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None
+2026-10-20 18:28:29.726 - PhaseRunner - NOTICE - Phase profiling (profiling) started | phase_index=1 | profiling_index=0 | target: 120.0s duration
+2026-10-20 18:28:29.726 - PhaseRunner - INFO - Waiting for event 'profiling phase sending' with timeout of 119.999493892s
+2026-10-20 18:28:29.726 - records_manager - INFO - Credit phase start: profiling
+2026-10-20 18:30:29.725 - PhaseRunner - INFO - Timeout of 119.999493892s elapsed for event 'profiling phase sending'
+2026-10-20 18:30:29.725 - PhaseRunner - NOTICE - Phase profiling (profiling) sending complete | sent=1,165, completed=1,117, in_flight=48 | sessions: sent=1,165, completed=1,117 | timeout_triggered=True
+2026-10-20 18:30:29.726 - PhaseRunner - INFO - Waiting for event 'profiling phase credits returned' with timeout of 29.999846102999996s
+2026-10-20 18:30:29.726 - records_manager - INFO - Sent 1,165 requests. Waiting for all to complete...
+2026-10-20 18:30:33.499 - PhaseRunner - NOTICE - Phase profiling (profiling) complete | completed=1,165, cancelled=0, errors=0 | sessions: completed=1,165, cancelled=0 | elapsed=123.77s
+2026-10-20 18:30:33.500 - PhaseOrchestrator_529a7bd8 - NOTICE - All credits completed
+2026-10-20 18:30:33.500 - records_manager - INFO - Received CREDIT_PHASE_COMPLETE message, Phase complete: PhaseRecordsStats(phase=CreditPhase.PROFILING, phase_index=1, profiling_index=0, phase_name='profiling', phase_kind='profiling', start_ns=1792492109726082558, sent_end_ns=1792492229725751295, requests_end_ns=1792492233499607575, baseline_start_ns=1792492109726046728, baseline_end_ns=1792492233499623119, total_expected_requests=None, expected_duration_sec=None, expected_num_sessions=None, expected_grace_period_sec=None, final_requests_sent=None, final_requests_completed=1165, final_requests_cancelled=0, final_request_errors=0, final_sent_sessions=None, final_completed_sessions=None, final_cancelled_sessions=None, timeout_triggered=True, grace_period_timeout_triggered=False, was_cancelled=False, records_end_ns=None, success_records=1164, error_records=0)
+2026-10-20 18:30:33.501 - system_controller - INFO - Received credits complete from 'timing_manager'
+2026-10-20 18:30:33.501 - records_manager - NOTICE - All requests have completed, please wait for the results to be processed (currently 1,164 of 1,165 records processed)...
+2026-10-20 18:30:33.502 - records_manager - INFO - All credits complete, please wait for the results to be processed...
+2026-10-20 18:30:33.510 - records_manager - INFO - Processed 1165 valid requests and 0 errors (1165 total).
+2026-10-20 18:30:33.510 - records_manager - INFO - Received all records, processing now...
+2026-10-20 18:30:33.512 - records_manager - INFO - Waiting 2.0s for server metrics flush period...
+2026-10-20 18:30:35.499 - records_manager - INFO - Processing records results...
+2026-10-20 18:30:35.873 - records_manager - INFO - _finalize_and_process_results completed
+2026-10-20 18:30:35.873 - system_controller - INFO - All results received, initiating shutdown
+2026-10-20 18:30:36.481 - ExporterManager - INFO - Exporting all records
+2026-10-20 18:30:36.524 - ExporterManager - INFO - Exporting console data
